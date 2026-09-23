@@ -65,7 +65,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM Countries WHERE CountryName = @CountryName";
+            string Query = "SELECT * FROM Countries WHERE CountryName LIKE @CountryName + '%'";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -109,8 +109,6 @@ namespace DVLDDataAccessLayer
 
             return IsFound;
         }
-
-
 
 
 

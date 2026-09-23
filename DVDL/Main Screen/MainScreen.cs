@@ -17,25 +17,16 @@ namespace DVLDPresentationLayer
             InitializeComponent();
         }
 
-
-        private void LoadManagePeopleScreenInPanel(Form frm)
+        private void frmMainScreen_Load(object sender, EventArgs e)
         {
-            pnlMain.Controls.Clear();
-            frm.TopLevel = false;
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-            pnlMain.Controls.Add(frm);
-            frm.BringToFront();
-            frm.Show();
+
         }
-
-
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new ManagePeopleScreen();
+            Form frm = new frmManagePeople();
 
-            LoadManagePeopleScreenInPanel(frm);
+            frm.ShowDialog();
         }
     }
 }

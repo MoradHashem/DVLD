@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DVDL
+namespace DVLDPresentationLayer
 {
-    public partial class AddEditPersonInfo : Form
+    public partial class frmPersonDetails : Form
     {
-        public AddEditPersonInfo()
+
+
+        public frmPersonDetails(int PersonID)
         {
             InitializeComponent();
+            usctrlPersonDetails1.PersonID = PersonID;
+        }
+
+        private void frmPersonDetails_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

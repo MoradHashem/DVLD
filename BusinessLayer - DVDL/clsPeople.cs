@@ -137,7 +137,7 @@ namespace DVLDBusinessLayer
 
         public static clsPeople FindPersonByID(int PersonID)
         {
-            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "", 
+            string FirstName = "", SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "",
                    Email = "", Address = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
             byte Gendor = 0;
@@ -146,18 +146,23 @@ namespace DVLDBusinessLayer
 
             if (clsPeopleDataAccess.GetPersonInfoByPersonID(PersonID, ref FirstName, ref SecondName, ref ThirdName,
                                            ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
+                                            ref Country, ref Address, ref ImagePath))
 
                 return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
                                  DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-                                            
+
 
             else
 
                 return null;
-                                      
+
         }
 
+
+        //public static DataTable FindPeopleByPersonID(int PersonID)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByPersonID(PersonID);
+        //}
 
 
         public static clsPeople FindPersonByFirstName(string FirstName)
@@ -184,6 +189,12 @@ namespace DVLDBusinessLayer
         }
 
 
+        //public static DataTable FindPeopleByFirstName(string FirstName)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByFirstName(FirstName);
+        //}
+
+
         public static clsPeople FindPersonBySecondName(string SecondName)
         {
             string FirstName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "",
@@ -206,6 +217,12 @@ namespace DVLDBusinessLayer
                 return null;
 
         }
+
+
+        //public static DataTable FindPeopleBySecondName(string SecondName)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleBySecondName(SecondName);
+        //}
 
 
         public static clsPeople FindPersonByThirdName(string ThirdName)
@@ -232,6 +249,11 @@ namespace DVLDBusinessLayer
         }
 
 
+        //public static DataTable FindPeopleByThirdName(string ThirdName)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByThirdName(ThirdName);
+        //}
+
 
         public static clsPeople FindPersonByLastName(string LastName)
         {
@@ -256,6 +278,11 @@ namespace DVLDBusinessLayer
 
         }
 
+
+        //public static DataTable FindPeopleByLastName(string LastName)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByLastName(LastName);
+        //}
 
 
         public static clsPeople FindPersonByNationalNo(string NationalNo)
@@ -282,6 +309,17 @@ namespace DVLDBusinessLayer
         }
 
 
+        //public static DataTable FindPeopleByNationalNo(string NationalNo)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByNationalNo(NationalNo);
+        //}
+
+
+        //public static DataTable FindPeopleByGendor(byte Gendor)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByGendor(Gendor);
+        //}
+
 
         public static clsPeople FindPersonByPhone(string Phone)
         {
@@ -306,6 +344,11 @@ namespace DVLDBusinessLayer
 
         }
 
+
+        //public static DataTable FindPeopleByPhone(string Phone)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByPhone(Phone);
+        //}
 
 
         public static clsPeople FindPersonByEmail(string Email)
@@ -332,6 +375,11 @@ namespace DVLDBusinessLayer
         }
 
 
+        //public static DataTable FindPeopleByEmail(string Email)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByEmail(Email);
+        //}
+
 
         public static clsPeople FindPersonByCountry(int Country)
         {
@@ -357,11 +405,59 @@ namespace DVLDBusinessLayer
         }
 
 
+        //public static DataTable FindPeopleByNationality(int NationalityCountryID)
+        //{
+        //    return clsPeopleDataAccess.GetPeopleByNationality(NationalityCountryID);
+        //}
 
 
         public static DataTable ListPeople()
         {
-            return (clsPeopleDataAccess.ListPeople());
+            
+            DataTable dtPeople = clsPeopleDataAccess.ListPeople();
+
+            DataTable dtNew = new DataTable();
+
+
+            dtNew.Columns.Add("PersonID");
+            dtNew.Columns.Add("NationalNo");
+            dtNew.Columns.Add("FirstName");
+            dtNew.Columns.Add("SecondName");
+            dtNew.Columns.Add("ThirdName");
+            dtNew.Columns.Add("LastName");
+            dtNew.Columns.Add("Gendor");
+            dtNew.Columns.Add("DateOfBirth");
+            dtNew.Columns.Add("NationalityCountryID");
+            dtNew.Columns.Add("Phone");
+            dtNew.Columns.Add("Email");
+
+
+            foreach (DataRow Row in dtPeople.Rows)
+            {
+                DataRow NewRow = dtNew.NewRow();
+
+                NewRow["PersonID"] = Row["PersonID"];
+                NewRow["NationalNo"] = Row["NationalNo"];
+                NewRow["FirstName"] = Row["FirstName"];
+                NewRow["SecondName"] = Row["SecondName"];
+                NewRow["ThirdName"] = Row["ThirdName"];
+                NewRow["LastName"] = Row["LastName"];
+                NewRow["Gendor"] = Convert.ToBoolean(Row["Gendor"]) ? "Female" : "Male";
+                NewRow["DateOfBirth"] = Row["DateOfBirth"];
+                NewRow["NationalityCountryID"] = clsCountry.FindCountryByID(Convert.ToInt32(Row["NationalityCountryID"])).CountryName;
+                NewRow["Phone"] = Row["Phone"];
+                NewRow["Email"] = Row["Email"];
+
+
+                dtNew.Rows.Add(NewRow);
+
+            }
+
+
+
+
+
+            return dtNew;
         }
 
 

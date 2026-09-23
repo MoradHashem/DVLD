@@ -14,11 +14,13 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"INSERT INTO People(FirstName, SecondName, ThirdName, LastName, NationalNo, DateOfBirth
-                                                Gendor, Phone, Email, NationalityCountryID, Address, ImagePath)
-                             VALUES(@FirstName, @SecondName, @ThirdName, @LastName, @NationalNo, @DateOfBirth
-                                    @Gendor, @Phone, @Email, @NationalityCountryID, @Address, @ImagePath)
-                             SELECT SCOPE_IDENTITY()";
+            string Query = @"INSERT INTO People(FirstName, SecondName, ThirdName, LastName,
+                                NationalNo, DateOfBirth, Gendor, Phone, Email,
+                                NationalityCountryID, Address, ImagePath)
+                            VALUES
+                            (@FirstName, @SecondName, @ThirdName, @LastName, @NationalNo, @DateOfBirth,
+                                    @Gendor, @Phone, @Email, @NationalityCountryID, @Address, @ImagePath);
+                            SELECT SCOPE_IDENTITY();";
 
 
             SqlCommand Command = new SqlCommand(Query, Connection);
@@ -32,16 +34,16 @@ namespace DVLDDataAccessLayer
             Command.Parameters.AddWithValue("@Gendor", Gendor);
             Command.Parameters.AddWithValue("@Phone", Phone);
             Command.Parameters.AddWithValue("@Email", Email);
-            Command.Parameters.AddWithValue("@Country", Country);
+            Command.Parameters.AddWithValue("@NationalityCountryID", Country);
             Command.Parameters.AddWithValue("@Address", Address);
 
             if( ImagePath != "" )
             {
-                Command.Parameters.AddWithValue("@Imagepath", ImagePath);
+                Command.Parameters.AddWithValue("@ImagePath", ImagePath);
             }
             else
             {
-                Command.Parameters.AddWithValue("@Imagepath", System.DBNull.Value);
+                Command.Parameters.AddWithValue("@ImagePath", System.DBNull.Value);
             }
 
 
@@ -55,9 +57,9 @@ namespace DVLDDataAccessLayer
                     PersonID = personID;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                
             }
             finally
             {
@@ -125,9 +127,9 @@ namespace DVLDDataAccessLayer
                                  Gendor = @Gendor,
                                  Phone = @Phone,
                                  Email = @Email,
-                                 Country = @Country,
+                                 NationalityCountryID = @Country,
                                  Address = @Address,
-                                 ImagePath = @ImagePath,
+                                 ImagePath = @ImagePath
                              WHERE PersonID = @PersonID";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
@@ -182,13 +184,13 @@ namespace DVLDDataAccessLayer
 
         public static bool GetPersonInfoByPersonID(int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
                                             ref string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, ref string Phone, ref string Email,
-                                            ref int Country)
+                                            ref int Country, ref string Address, ref string ImagePath)
         {
             bool IsFound = false;
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE PersonID = @PersonID";
+            string Query = "SELECT * FROM People WHERE PersonID = @PersonID";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -210,11 +212,13 @@ namespace DVLDDataAccessLayer
                     ThirdName = (string)Reader["ThirdName"];
                     LastName = (string)Reader["LastName"];
                     NationalNo = (string)Reader["NationalNo"];
-                    Country = (int)Reader["CountryName"];
+                    Country = Convert.ToInt32(Reader["NationalityCountryID"]);
                     Gendor = (byte)Reader["Gendor"];
                     Phone = (string)Reader["Phone"];
-                    Email = (string)Reader["Email"];
+                    Email = Reader["Email"] == DBNull.Value ? "" : (string)Reader["Email"];
                     DateOfBirth = (DateTime)Reader["DateOfBirth"];
+                    Address = (string)Reader["Address"];
+                    ImagePath = Reader["ImagePath"] == DBNull.Value ? "" : (string)Reader["ImagePath"];
 
 
                 }
@@ -243,7 +247,67 @@ namespace DVLDDataAccessLayer
             return IsFound;
         }
 
+        //public static DataTable GetPeopleByPersonID(int PersonID)
+        //{
+        //    DataTable dtPerson = new DataTable();
 
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.PersonID = @PersonID";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@PersonID", PersonID);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+
+                
+        //    }
+        //    catch 
+        //    {
+                
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+                
+        //    }
+
+        //    return dtPerson;
+        //}
 
 
         public static bool GetPersonInfoByFirstName(ref int PersonID, string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
@@ -254,7 +318,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE FirstName = @FirstName";
+            string Query = "SELECT * FROM People WHERE FirstName = @FirstName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -311,6 +375,64 @@ namespace DVLDDataAccessLayer
 
 
 
+        //public static DataTable GetPeopleByFirstName(string FirstName)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.FirstName LIKE @FirstName + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@FirstName", FirstName);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
 
         public static bool GetPersonInfoBySecondName(ref int PersonID, ref string FirstName, string SecondName, ref string ThirdName, ref string LastName,
                                     ref string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, ref string Phone, ref string Email,
@@ -321,7 +443,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE SecondName = @SecondName";
+            string Query = "SELECT * FROM People WHERE SecondName = @SecondName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -378,6 +500,65 @@ namespace DVLDDataAccessLayer
 
 
 
+        //public static DataTable GetPeopleBySecondName(string SecondName)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.SecondName LIKE @SecondName + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@SecondName", SecondName);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
+
 
         public static bool GetPersonInfoByThirdName(ref int PersonID, ref string FirstName, ref string SecondName, string ThirdName, ref string LastName,
                                     ref string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, ref string Phone, ref string Email,
@@ -387,7 +568,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE ThirdName = @ThirdName";
+            string Query = "SELECT * FROM People WHERE ThirdName = @ThirdName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -443,6 +624,65 @@ namespace DVLDDataAccessLayer
         }
 
 
+       
+        //public static DataTable GetPeopleByThirdName(string ThirdName)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.ThirdName LIKE @ThirdName + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@ThirdName", ThirdName);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
 
         public static bool GetPersonInfoByLastName(ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, string LastName,
                                     ref string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, ref string Phone, ref string Email,
@@ -452,7 +692,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE LastName = @LastName";
+            string Query = "SELECT * FROM People WHERE LastName = @LastName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -508,6 +748,65 @@ namespace DVLDDataAccessLayer
         }
 
 
+        //public static DataTable GetPeopleByLastName(string LastName)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.LastName LIKE @LastName + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@LastName", LastName);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
+
 
         public static bool GetPersonInfoByNationalNo(ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
                                     string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, ref string Phone, ref string Email,
@@ -517,7 +816,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE NationalNo = @NationalNo";
+            string Query = "SELECT * FROM People WHERE NationalNo = @NationalNo";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -539,7 +838,7 @@ namespace DVLDDataAccessLayer
                     SecondName = (string)Reader["SecondName"];
                     ThirdName = (string)Reader["ThirdName"];
                     LastName = (string)Reader["LastName"];
-                    Country = (int)Reader["CountryName"];
+                    Country = (int)Reader["NationalityCountryID"];
                     Gendor = (byte)Reader["Gendor"];
                     Phone = (string)Reader["Phone"];
                     Email = (string)Reader["Email"];
@@ -574,6 +873,65 @@ namespace DVLDDataAccessLayer
 
 
 
+        //public static DataTable GetPeopleByNationalNo(string NationalNo)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.NationalNo LIKE @NationalNo + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
+
         public static bool GetPersonInfoByGendor(ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
                                     ref string NationalNo, ref DateTime DateOfBirth, byte Gendor, ref string Phone, ref string Email,
                                     ref int Country)
@@ -582,7 +940,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE Gendor = @Gendor";
+            string Query = "SELECT * FROM People WHERE Gendor = @Gendor";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -639,6 +997,66 @@ namespace DVLDDataAccessLayer
 
 
 
+        //public static DataTable GetPeopleByGendor(byte Gendor)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.Gendor = @Gendor";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@Gendor", Gendor);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
+
+
+
         public static bool GetPersonInfoByPhone(ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
                                     ref string NationalNo, ref DateTime DateOfBirth, ref byte Gendor, string Phone, ref string Email,
                                     ref int Country)
@@ -647,7 +1065,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE Phone = @Phone";
+            string Query = "SELECT * FROM People WHERE Phone = @Phone";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -702,7 +1120,64 @@ namespace DVLDDataAccessLayer
             return IsFound;
         }
 
+      
+        //public static DataTable GetPeopleByPhone(string Phone)
+        //{
+        //    DataTable dtPerson = new DataTable();
 
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.Phone LIKE @Phone + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@Phone", Phone);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
 
 
         public static bool GetPersonInfoByEmail(ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName,
@@ -713,7 +1188,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE Email = @Email";
+            string Query = "SELECT * FROM People WHERE Email = @Email";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -736,7 +1211,7 @@ namespace DVLDDataAccessLayer
                     ThirdName = (string)Reader["ThirdName"];
                     LastName = (string)Reader["LastName"];
                     NationalNo = (string)Reader["NationalNo"];
-                    Country = (int)Reader["CountryName"];
+                    Country = (int)Reader["NationalityCountryID"];
                     Gendor = (byte)Reader["Gendor"];
                     Phone = (string)Reader["Phone"];
                     DateOfBirth = (DateTime)Reader["DateOfBirth"];
@@ -769,6 +1244,63 @@ namespace DVLDDataAccessLayer
         }
 
 
+        //public static DataTable GetPeopleByEmail(string Email)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.Email LIKE @Email + '%'";
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@Email", Email);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
 
 
 
@@ -780,7 +1312,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View WHERE Country = @Country";
+            string Query = "SELECT * FROM People WHERE Country = @Country";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -836,6 +1368,64 @@ namespace DVLDDataAccessLayer
         }
 
 
+        //public static DataTable GetPeopleByNationality(int NationalityCountryID)
+        //{
+        //    DataTable dtPerson = new DataTable();
+
+        //    SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string Query = @"
+        //        SELECT
+        //            People.PersonID,
+        //            People.NationalNo,
+        //            People.FirstName,
+        //            People.SecondName,
+        //            People.ThirdName,
+        //            People.LastName,
+
+        //            CASE
+        //                WHEN People.Gendor = 0 THEN 'Male'
+        //                WHEN People.Gendor = 1 THEN 'Female'
+        //            END AS Gendor,
+
+        //            People.DateOfBirth,
+
+        //            Countries.CountryName AS Nationality,
+
+        //            People.Address,
+        //            People.Phone,
+        //            People.Email
+
+        //        FROM People
+
+        //        INNER JOIN Countries
+        //            ON People.NationalityCountryID = Countries.CountryID
+
+        //        WHERE People.NationalityCountryID = @NationalityCountryID";
+
+
+        //    SqlCommand Command = new SqlCommand(Query, Connection);
+
+        //    Command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+
+        //    try
+        //    {
+        //        Connection.Open();
+
+        //        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+
+        //        Adapter.Fill(dtPerson);
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        Connection.Close();
+        //    }
+
+        //    return dtPerson;
+        //}
 
 
 
@@ -845,7 +1435,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM PersonInfo_View";
+            string Query = "SELECT * FROM People";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
