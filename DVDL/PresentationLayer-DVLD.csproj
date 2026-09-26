@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Users\Manage Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\Manage Users.Designer.cs">
+      <DependentUpon>Manage Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\AddEditPersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="User Controls\usctrPersonDetails.Designer.cs">
       <DependentUpon>usctrPersonDetails.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Users\Manage Users.resx">
+      <DependentUpon>Manage Users.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="People\AddEditPersonInfo.resx">
       <DependentUpon>AddEditPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -218,7 +227,7 @@
     <None Include="Resources\call 32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Users\" />
+    <None Include="Resources\Users 2 400.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ namespace DVLDBusinessLayer
 
 
 
-        public int PersonID { get; private set; }
+        public int PersonID { get; private set; }   
         public string FirstName { set; get; }
         public string SecondName { set; get; }
         public string ThirdName { set; get; }

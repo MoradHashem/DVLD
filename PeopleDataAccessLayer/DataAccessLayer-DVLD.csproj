@@ -7,7 +7,7 @@
     <ProjectGuid>{DC23E990-6729-4FD3-96A9-A8A05C63B78A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PeopleDataAccessLayer</RootNamespace>
+    <RootNamespace>DVLDDataAccessLayer</RootNamespace>
     <AssemblyName>PeopleDataAccessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,7 @@
     <Compile Include="clsCountryDataAccess.cs" />
     <Compile Include="clsPeopleDataAccess.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
+    <Compile Include="clsUserDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

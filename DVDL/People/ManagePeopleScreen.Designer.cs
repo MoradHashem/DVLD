@@ -104,10 +104,12 @@
             this.dgvListPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListPeople.ContextMenuStrip = this.cmsManagePeople;
             this.dgvListPeople.Location = new System.Drawing.Point(14, 309);
+            this.dgvListPeople.MultiSelect = false;
             this.dgvListPeople.Name = "dgvListPeople";
             this.dgvListPeople.ReadOnly = true;
             this.dgvListPeople.RowHeadersWidth = 51;
             this.dgvListPeople.RowTemplate.Height = 26;
+            this.dgvListPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListPeople.Size = new System.Drawing.Size(1381, 412);
             this.dgvListPeople.TabIndex = 4;
             this.dgvListPeople.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListPeople_CellContentClick);
@@ -249,6 +251,7 @@
             this.ptrManagePeopleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptrManagePeopleImage.TabIndex = 0;
             this.ptrManagePeopleImage.TabStop = false;
+            this.ptrManagePeopleImage.Click += new System.EventHandler(this.ptrManagePeopleImage_Click);
             // 
             // frmManagePeople
             // 

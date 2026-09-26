@@ -314,6 +314,9 @@ namespace DVLDPresentationLayer
             _RefrashPeopleList();
         }
 
-       
+        private void ptrManagePeopleImage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

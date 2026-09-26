@@ -28,5 +28,12 @@ namespace DVLDPresentationLayer
 
             frm.ShowDialog();
         }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmManageUsers();
+
+            frm.ShowDialog();
+        }
     }
 }
