@@ -58,7 +58,6 @@
             this.ptrName = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ptrNationalNo = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.gbPersonInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptrImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrCountry)).BeginInit();
@@ -90,9 +89,9 @@
             this.lblCountries.AutoSize = true;
             this.lblCountries.Location = new System.Drawing.Point(550, 191);
             this.lblCountries.Name = "lblCountries";
-            this.lblCountries.Size = new System.Drawing.Size(66, 17);
+            this.lblCountries.Size = new System.Drawing.Size(46, 17);
             this.lblCountries.TabIndex = 17;
-            this.lblCountries.Text = "Countries";
+            this.lblCountries.Text = "[????]";
             // 
             // lblCountry
             // 
@@ -109,9 +108,9 @@
             this.lblPhones.AutoSize = true;
             this.lblPhones.Location = new System.Drawing.Point(550, 153);
             this.lblPhones.Name = "lblPhones";
-            this.lblPhones.Size = new System.Drawing.Size(47, 17);
+            this.lblPhones.Size = new System.Drawing.Size(46, 17);
             this.lblPhones.TabIndex = 15;
-            this.lblPhones.Text = "Phone";
+            this.lblPhones.Text = "[????]";
             // 
             // lblPhone
             // 
@@ -128,9 +127,9 @@
             this.lblDateOfBirth1.AutoSize = true;
             this.lblDateOfBirth1.Location = new System.Drawing.Point(550, 114);
             this.lblDateOfBirth1.Name = "lblDateOfBirth1";
-            this.lblDateOfBirth1.Size = new System.Drawing.Size(79, 17);
+            this.lblDateOfBirth1.Size = new System.Drawing.Size(46, 17);
             this.lblDateOfBirth1.TabIndex = 13;
-            this.lblDateOfBirth1.Text = "DateOfBirth";
+            this.lblDateOfBirth1.Text = "[????]";
             // 
             // lblDateOfBirth
             // 
@@ -147,9 +146,9 @@
             this.lblAddresss.AutoSize = true;
             this.lblAddresss.Location = new System.Drawing.Point(146, 232);
             this.lblAddresss.Name = "lblAddresss";
-            this.lblAddresss.Size = new System.Drawing.Size(56, 17);
+            this.lblAddresss.Size = new System.Drawing.Size(46, 17);
             this.lblAddresss.TabIndex = 11;
-            this.lblAddresss.Text = "Address";
+            this.lblAddresss.Text = "[????]";
             // 
             // lblAddress
             // 
@@ -166,9 +165,9 @@
             this.lblEmails.AutoSize = true;
             this.lblEmails.Location = new System.Drawing.Point(146, 191);
             this.lblEmails.Name = "lblEmails";
-            this.lblEmails.Size = new System.Drawing.Size(39, 17);
+            this.lblEmails.Size = new System.Drawing.Size(46, 17);
             this.lblEmails.TabIndex = 9;
-            this.lblEmails.Text = "Email";
+            this.lblEmails.Text = "[????]";
             // 
             // lblEmail
             // 
@@ -185,9 +184,9 @@
             this.lblGendors.AutoSize = true;
             this.lblGendors.Location = new System.Drawing.Point(146, 153);
             this.lblGendors.Name = "lblGendors";
-            this.lblGendors.Size = new System.Drawing.Size(53, 17);
+            this.lblGendors.Size = new System.Drawing.Size(46, 17);
             this.lblGendors.TabIndex = 7;
-            this.lblGendors.Text = "Gendor";
+            this.lblGendors.Text = "[????]";
             // 
             // lblGendor
             // 
@@ -204,9 +203,9 @@
             this.lblNationalNum.AutoSize = true;
             this.lblNationalNum.Location = new System.Drawing.Point(146, 114);
             this.lblNationalNum.Name = "lblNationalNum";
-            this.lblNationalNum.Size = new System.Drawing.Size(77, 17);
+            this.lblNationalNum.Size = new System.Drawing.Size(46, 17);
             this.lblNationalNum.TabIndex = 5;
-            this.lblNationalNum.Text = "National No";
+            this.lblNationalNum.Text = "[????]";
             // 
             // lblNationalNo
             // 
@@ -225,9 +224,9 @@
             this.lblFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblFullName.Location = new System.Drawing.Point(146, 74);
             this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(79, 18);
+            this.lblFullName.Size = new System.Drawing.Size(58, 18);
             this.lblFullName.TabIndex = 3;
-            this.lblFullName.Text = "FullName";
+            this.lblFullName.Text = "[????]";
             // 
             // lblName
             // 
@@ -244,9 +243,9 @@
             this.lblID.AutoSize = true;
             this.lblID.Location = new System.Drawing.Point(146, 40);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(30, 17);
+            this.lblID.Size = new System.Drawing.Size(46, 17);
             this.lblID.TabIndex = 1;
-            this.lblID.Text = "N/A";
+            this.lblID.Text = "[????]";
             // 
             // lblPersonID
             // 
@@ -295,6 +294,7 @@
             this.gbPersonInformation.TabIndex = 39;
             this.gbPersonInformation.TabStop = false;
             this.gbPersonInformation.Text = "Person Information";
+            this.gbPersonInformation.Enter += new System.EventHandler(this.gbPersonInformation_Enter);
             // 
             // ptrImage
             // 
@@ -406,31 +406,14 @@
             this.ptrNationalNo.TabIndex = 18;
             this.ptrNationalNo.TabStop = false;
             // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.White;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Image = global::DVLDPresentationLayer.Properties.Resources.Close_32;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(737, 316);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(149, 36);
-            this.btnClose.TabIndex = 40;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // usctrlPersonDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.gbPersonInformation);
             this.Name = "usctrlPersonDetails";
-            this.Size = new System.Drawing.Size(899, 362);
+            this.Size = new System.Drawing.Size(899, 320);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.gbPersonInformation.ResumeLayout(false);
             this.gbPersonInformation.PerformLayout();
@@ -449,8 +432,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.LinkLabel lnkEditPersonInfo;
         private System.Windows.Forms.PictureBox ptrImage;
         private System.Windows.Forms.PictureBox ptrCountry;

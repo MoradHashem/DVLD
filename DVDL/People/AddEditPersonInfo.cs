@@ -18,6 +18,17 @@ namespace DVLDPresentationLayer
         private int _PersonID = -1;
 
 
+        public delegate void DataBackEvenHandler(object sender, int PersonID);
+
+        public event DataBackEvenHandler DataBack;
+
+
+        public int GetPersonID()
+        {
+            return _PersonID;
+        }
+
+
         private void _MakeMode(int PersonID)
         {
             _PersonID = PersonID;
@@ -57,10 +68,11 @@ namespace DVLDPresentationLayer
             
         }
 
-        private void frmAddEditPersonInfo_DataBack(object sender, int PersonID, string Title)
+        private void frmAddEditPersonInfo_DataBack(object sender, int PersonID)
         {
             lblID.Text = PersonID.ToString();
-            lblTitle.Text = Title;
+            lblTitle.Text = "Edit Person Info";
+            DataBack?.Invoke(this, PersonID);
         }
 
         private void frmAddEditPersonInfo_Load(object sender, EventArgs e)
@@ -68,5 +80,6 @@ namespace DVLDPresentationLayer
             usctrlAddEditPersonInfo1.DataBack += frmAddEditPersonInfo_DataBack;
         }
 
+     
     }
 }

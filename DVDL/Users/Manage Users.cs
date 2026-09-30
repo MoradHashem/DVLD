@@ -149,5 +149,12 @@ namespace DVLDPresentationLayer
 
             lblCount.Text = dgvListUsers.RowCount.ToString();
         }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmAddEditNewUser();
+
+            frm.ShowDialog();
+        }
     }
 }

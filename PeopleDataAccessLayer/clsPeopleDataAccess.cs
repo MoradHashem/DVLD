@@ -963,7 +963,7 @@ namespace DVLDDataAccessLayer
                     ThirdName = (string)Reader["ThirdName"];
                     LastName = (string)Reader["LastName"];
                     NationalNo = (string)Reader["NationalNo"];
-                    Country = (int)Reader["CountryName"];
+                    Country = (int)Reader["NationalityCountryID"];
                     Phone = (string)Reader["Phone"];
                     Email = (string)Reader["Email"];
                     DateOfBirth = (DateTime)Reader["DateOfBirth"];

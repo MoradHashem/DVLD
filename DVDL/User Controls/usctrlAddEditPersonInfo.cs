@@ -26,7 +26,7 @@ namespace DVLDPresentationLayer
         private clsPeople _Person;
 
 
-        public delegate void DataBackEventHandler(object sender, int PersonID, string Title);
+        public delegate void DataBackEventHandler(object sender, int PersonID);
 
         public event DataBackEventHandler DataBack;
 
@@ -286,11 +286,10 @@ namespace DVLDPresentationLayer
 
 
             PersonID = _Person.PersonID;
-            _Title = "Edit Person Info";
 
             _Mode = _enMode.Update;
 
-            DataBack?.Invoke(this, PersonID, _Title);
+            DataBack?.Invoke(this, PersonID);
         }
 
         private void usctrlAddEditPersonInfo_Load(object sender, EventArgs e)

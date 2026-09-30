@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
+using DVLDPresentationLayer.Properties;
 
 namespace DVLDPresentationLayer
 {
@@ -20,6 +21,14 @@ namespace DVLDPresentationLayer
 
         public int PersonID;
         private clsPeople _Person;
+
+
+
+        public void LoadPersonInfo(int PersonID)
+        {
+            this.PersonID = PersonID;
+            _LoadDate();
+        }
 
 
         private void _LoadDate()
@@ -57,16 +66,17 @@ namespace DVLDPresentationLayer
             if (!string.IsNullOrEmpty(_Person.ImagePath))
                 ptrImage.Load(_Person.ImagePath);
 
+            else
+                ptrImage.Image = Resources.Male_512;
+
 
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.FindForm().Close();
-        }
-
+       
         private void UserControl1_Load(object sender, EventArgs e)
         {
+            ptrImage.Image = Resources.Male_512;
+
             if (PersonID <= 0)
                 return;
 
@@ -79,10 +89,16 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditPersonInfo(PersonID);
 
             frm.ShowDialog();
+            _LoadDate();
             
         }
 
         private void ptrImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gbPersonInformation_Enter(object sender, EventArgs e)
         {
 
         }
