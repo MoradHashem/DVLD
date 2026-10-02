@@ -17,10 +17,10 @@ namespace DVLDBusinessLayer
 
 
         public int PersonID { get; set; }
-        public int UserID { set; private get; }
+        public int UserID { private set; get; }
         public string UserName { set; get; }
         public string Password { set; get; }
-        public Byte IsActive { set; get; }
+        public bool IsActive { set; get; }
 
 
         public clsUsers()
@@ -29,13 +29,13 @@ namespace DVLDBusinessLayer
             this.PersonID = -1;
             this.UserName = "";
             this.Password = "";
-            this.IsActive = 0;
+            this.IsActive = true;
 
             Mode = _enMode.AddNew;
         }
 
 
-        public clsUsers(int UserID, int PersonID, string UserName, string Password, byte IsActive)
+        public clsUsers(int UserID, int PersonID, string UserName, string Password, bool IsActive)
         {
             this.UserID = UserID;
             this.PersonID = PersonID;
@@ -50,7 +50,7 @@ namespace DVLDBusinessLayer
 
         private bool _AddNewUser()
         {
-            this.UserID = clsUserDataAccess.AddNewUser(this.UserID, this.PersonID, this.UserName, this.Password, this.IsActive);
+            this.UserID = clsUserDataAccess.AddNewUser(this.PersonID, this.UserName, this.Password, this.IsActive);
 
 
             return (UserID != -1);
@@ -105,11 +105,11 @@ namespace DVLDBusinessLayer
         public static clsUsers FindUserByID(int UserID)
         {
             string UserName = "", Password = "";
-            byte IsActive = 0;
+            bool IsActive = true;
             int PersonID = -1;
 
 
-            if (clsUserDataAccess.GetUserInfoByUserID(UserID, ref PersonID, ref UserName, ref Password,ref IsActive))
+            if (clsUserDataAccess.GetUserInfoByUserID(UserID, ref PersonID, ref UserName, ref Password, ref IsActive))
                                            
 
                 return new clsUsers(UserID, PersonID, UserName, Password, IsActive);
@@ -135,7 +135,7 @@ namespace DVLDBusinessLayer
             dtNew.Columns.Add("Person ID", typeof(int));
             dtNew.Columns.Add("Full Name");
             dtNew.Columns.Add("User Name");
-            dtNew.Columns.Add("Is Active", typeof(bool));
+            dtNew.Columns.Add("Is Active");
 
 
             foreach (DataRow Row in dtUsers.Rows)
@@ -146,7 +146,7 @@ namespace DVLDBusinessLayer
                 NewRow["Person ID"] = Row["PersonID"];
                 NewRow["Full Name"] = Row["FirstName"] + " " + Row["SecondName"] + " " + Row["ThirdName"] + " " + Row["LastName"];
                 NewRow["User Name"] = Row["UserName"];
-                NewRow["Is Active"] = Convert.ToBoolean(Row["IsActive"]);
+                NewRow["Is Active"] = Row["IsActive"];
 
 
                 dtNew.Rows.Add(NewRow);

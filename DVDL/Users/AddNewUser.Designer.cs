@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -37,26 +38,28 @@
             this.usctrlPersonDetails1 = new DVLDPresentationLayer.usctrlPersonDetails();
             this.btnNext = new System.Windows.Forms.Button();
             this.tpLoginInfo = new System.Windows.Forms.TabPage();
-            this.lblUserID = new System.Windows.Forms.Label();
-            this.lblUserName = new System.Windows.Forms.Label();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.lblConfirmPassword = new System.Windows.Forms.Label();
-            this.ptrUserID = new System.Windows.Forms.PictureBox();
-            this.ptrUserName = new System.Windows.Forms.PictureBox();
-            this.ptrPassword = new System.Windows.Forms.PictureBox();
-            this.ptrConfirmPassword = new System.Windows.Forms.PictureBox();
-            this.lblUserIDValue = new System.Windows.Forms.Label();
-            this.txtUserName = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.ckIsActive = new System.Windows.Forms.CheckBox();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.lblUserIDValue = new System.Windows.Forms.Label();
+            this.ptrConfirmPassword = new System.Windows.Forms.PictureBox();
+            this.ptrPassword = new System.Windows.Forms.PictureBox();
+            this.ptrUserName = new System.Windows.Forms.PictureBox();
+            this.ptrUserID = new System.Windows.Forms.PictureBox();
+            this.lblConfirmPassword = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.lblUserID = new System.Windows.Forms.Label();
+            this.erpMessage = new System.Windows.Forms.ErrorProvider(this.components);
             this.tcAddNewUser.SuspendLayout();
             this.tpPersonalInfo.SuspendLayout();
             this.tpLoginInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrUserID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrUserName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrConfirmPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrUserName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrUserID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpMessage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -100,6 +103,7 @@
             this.btnSave.TabIndex = 41;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tcAddNewUser
             // 
@@ -179,79 +183,53 @@
             this.tpLoginInfo.Size = new System.Drawing.Size(919, 530);
             this.tpLoginInfo.TabIndex = 1;
             this.tpLoginInfo.Text = "Login Info";
+            this.tpLoginInfo.Click += new System.EventHandler(this.tpLoginInfo_Click);
             // 
-            // lblUserID
+            // ckIsActive
             // 
-            this.lblUserID.AutoSize = true;
-            this.lblUserID.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserID.Location = new System.Drawing.Point(116, 68);
-            this.lblUserID.Name = "lblUserID";
-            this.lblUserID.Size = new System.Drawing.Size(74, 18);
-            this.lblUserID.TabIndex = 1;
-            this.lblUserID.Text = "User ID :";
+            this.ckIsActive.AutoSize = true;
+            this.ckIsActive.Location = new System.Drawing.Point(265, 250);
+            this.ckIsActive.Name = "ckIsActive";
+            this.ckIsActive.Size = new System.Drawing.Size(81, 21);
+            this.ckIsActive.TabIndex = 28;
+            this.ckIsActive.Text = "Is Active";
+            this.ckIsActive.UseVisualStyleBackColor = true;
             // 
-            // lblUserName
+            // txtConfirmPassword
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(91, 112);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(99, 18);
-            this.lblUserName.TabIndex = 2;
-            this.lblUserName.Text = "User Name :";
+            this.txtConfirmPassword.Location = new System.Drawing.Point(265, 194);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.Size = new System.Drawing.Size(150, 24);
+            this.txtConfirmPassword.TabIndex = 27;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
+            this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
             // 
-            // lblPassword
+            // txtPassword
             // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(100, 154);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(90, 18);
-            this.lblPassword.TabIndex = 3;
-            this.lblPassword.Text = "Password :";
+            this.txtPassword.Location = new System.Drawing.Point(265, 153);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(150, 24);
+            this.txtPassword.TabIndex = 26;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
             // 
-            // lblConfirmPassword
+            // txtUserName
             // 
-            this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmPassword.Location = new System.Drawing.Point(37, 195);
-            this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(153, 18);
-            this.lblConfirmPassword.TabIndex = 4;
-            this.lblConfirmPassword.Text = "Confirm Password :";
+            this.txtUserName.Location = new System.Drawing.Point(265, 106);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(150, 24);
+            this.txtUserName.TabIndex = 25;
+            this.txtUserName.Validating += new System.ComponentModel.CancelEventHandler(this.txtUserName_Validating);
             // 
-            // ptrUserID
+            // lblUserIDValue
             // 
-            this.ptrUserID.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.ptrUserID.Location = new System.Drawing.Point(211, 68);
-            this.ptrUserID.Margin = new System.Windows.Forms.Padding(4);
-            this.ptrUserID.Name = "ptrUserID";
-            this.ptrUserID.Size = new System.Drawing.Size(22, 23);
-            this.ptrUserID.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptrUserID.TabIndex = 19;
-            this.ptrUserID.TabStop = false;
-            // 
-            // ptrUserName
-            // 
-            this.ptrUserName.Image = global::DVLDPresentationLayer.Properties.Resources.Person_32;
-            this.ptrUserName.Location = new System.Drawing.Point(211, 112);
-            this.ptrUserName.Margin = new System.Windows.Forms.Padding(4);
-            this.ptrUserName.Name = "ptrUserName";
-            this.ptrUserName.Size = new System.Drawing.Size(22, 23);
-            this.ptrUserName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptrUserName.TabIndex = 21;
-            this.ptrUserName.TabStop = false;
-            // 
-            // ptrPassword
-            // 
-            this.ptrPassword.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.ptrPassword.Location = new System.Drawing.Point(211, 154);
-            this.ptrPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.ptrPassword.Name = "ptrPassword";
-            this.ptrPassword.Size = new System.Drawing.Size(22, 23);
-            this.ptrPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptrPassword.TabIndex = 22;
-            this.ptrPassword.TabStop = false;
+            this.lblUserIDValue.AutoSize = true;
+            this.lblUserIDValue.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserIDValue.Location = new System.Drawing.Point(262, 70);
+            this.lblUserIDValue.Name = "lblUserIDValue";
+            this.lblUserIDValue.Size = new System.Drawing.Size(35, 16);
+            this.lblUserIDValue.TabIndex = 24;
+            this.lblUserIDValue.Text = "????";
             // 
             // ptrConfirmPassword
             // 
@@ -264,46 +242,82 @@
             this.ptrConfirmPassword.TabIndex = 23;
             this.ptrConfirmPassword.TabStop = false;
             // 
-            // lblUserIDValue
+            // ptrPassword
             // 
-            this.lblUserIDValue.AutoSize = true;
-            this.lblUserIDValue.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserIDValue.Location = new System.Drawing.Point(262, 70);
-            this.lblUserIDValue.Name = "lblUserIDValue";
-            this.lblUserIDValue.Size = new System.Drawing.Size(35, 16);
-            this.lblUserIDValue.TabIndex = 24;
-            this.lblUserIDValue.Text = "????";
+            this.ptrPassword.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
+            this.ptrPassword.Location = new System.Drawing.Point(211, 154);
+            this.ptrPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.ptrPassword.Name = "ptrPassword";
+            this.ptrPassword.Size = new System.Drawing.Size(22, 23);
+            this.ptrPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptrPassword.TabIndex = 22;
+            this.ptrPassword.TabStop = false;
             // 
-            // txtUserName
+            // ptrUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(265, 106);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(150, 24);
-            this.txtUserName.TabIndex = 25;
+            this.ptrUserName.Image = global::DVLDPresentationLayer.Properties.Resources.Person_32;
+            this.ptrUserName.Location = new System.Drawing.Point(211, 112);
+            this.ptrUserName.Margin = new System.Windows.Forms.Padding(4);
+            this.ptrUserName.Name = "ptrUserName";
+            this.ptrUserName.Size = new System.Drawing.Size(22, 23);
+            this.ptrUserName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptrUserName.TabIndex = 21;
+            this.ptrUserName.TabStop = false;
             // 
-            // txtPassword
+            // ptrUserID
             // 
-            this.txtPassword.Location = new System.Drawing.Point(265, 153);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(150, 24);
-            this.txtPassword.TabIndex = 26;
+            this.ptrUserID.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
+            this.ptrUserID.Location = new System.Drawing.Point(211, 68);
+            this.ptrUserID.Margin = new System.Windows.Forms.Padding(4);
+            this.ptrUserID.Name = "ptrUserID";
+            this.ptrUserID.Size = new System.Drawing.Size(22, 23);
+            this.ptrUserID.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptrUserID.TabIndex = 19;
+            this.ptrUserID.TabStop = false;
             // 
-            // txtConfirmPassword
+            // lblConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(265, 194);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.Size = new System.Drawing.Size(150, 24);
-            this.txtConfirmPassword.TabIndex = 27;
+            this.lblConfirmPassword.AutoSize = true;
+            this.lblConfirmPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmPassword.Location = new System.Drawing.Point(37, 195);
+            this.lblConfirmPassword.Name = "lblConfirmPassword";
+            this.lblConfirmPassword.Size = new System.Drawing.Size(153, 18);
+            this.lblConfirmPassword.TabIndex = 4;
+            this.lblConfirmPassword.Text = "Confirm Password :";
             // 
-            // ckIsActive
+            // lblPassword
             // 
-            this.ckIsActive.AutoSize = true;
-            this.ckIsActive.Location = new System.Drawing.Point(265, 250);
-            this.ckIsActive.Name = "ckIsActive";
-            this.ckIsActive.Size = new System.Drawing.Size(81, 21);
-            this.ckIsActive.TabIndex = 28;
-            this.ckIsActive.Text = "Is Active";
-            this.ckIsActive.UseVisualStyleBackColor = true;
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(100, 154);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(90, 18);
+            this.lblPassword.TabIndex = 3;
+            this.lblPassword.Text = "Password :";
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Location = new System.Drawing.Point(91, 112);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(99, 18);
+            this.lblUserName.TabIndex = 2;
+            this.lblUserName.Text = "User Name :";
+            // 
+            // lblUserID
+            // 
+            this.lblUserID.AutoSize = true;
+            this.lblUserID.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserID.Location = new System.Drawing.Point(116, 68);
+            this.lblUserID.Name = "lblUserID";
+            this.lblUserID.Size = new System.Drawing.Size(74, 18);
+            this.lblUserID.TabIndex = 1;
+            this.lblUserID.Text = "User ID :";
+            // 
+            // erpMessage
+            // 
+            this.erpMessage.ContainerControl = this;
             // 
             // frmAddEditNewUser
             // 
@@ -325,10 +339,11 @@
             this.tpPersonalInfo.ResumeLayout(false);
             this.tpLoginInfo.ResumeLayout(false);
             this.tpLoginInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrUserID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrUserName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrConfirmPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrUserName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrUserID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpMessage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,5 +373,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label lblUserIDValue;
+        private System.Windows.Forms.ErrorProvider erpMessage;
     }
 }

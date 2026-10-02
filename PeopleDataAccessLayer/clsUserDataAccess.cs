@@ -7,20 +7,19 @@ namespace DVLDDataAccessLayer
     public class clsUserDataAccess
     {
 
-        public static int AddNewUser(int UserID, int PersonID, string UserName, string Password, byte IsActive)
+        public static int AddNewUser(int PersonID, string UserName, string Password, bool IsActive)
         {
-            int personID = -1;
+            int UserID = -1;
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = @"INSERT INTO Users(UserID, PersonID, UserName, Password, IsActive)
-                            VALUES (@UserID, @PersonID, @UserName, @Password, @IsActive);
+            string Query = @"INSERT INTO Users(PersonID, UserName, Password, IsActive)
+                            VALUES (@PersonID, @UserName, @Password, @IsActive);
                             SELECT SCOPE_IDENTITY();";
 
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
-            Command.Parameters.AddWithValue("@UserID", UserID);
             Command.Parameters.AddWithValue("@PersonID", PersonID);
             Command.Parameters.AddWithValue("@UserName", UserName);
             Command.Parameters.AddWithValue("@Password", Password);
@@ -31,9 +30,9 @@ namespace DVLDDataAccessLayer
                 Connection.Open();
                 object Result = Command.ExecuteScalar();
 
-                if (Result != null && int.TryParse(Result.ToString(), out int _PersonID))
+                if (Result != null && int.TryParse(Result.ToString(), out int _UserID))
                 {
-                    personID = _PersonID;
+                    UserID = _UserID;
                 }
             }
             catch
@@ -47,7 +46,7 @@ namespace DVLDDataAccessLayer
 
 
 
-            return PersonID;
+            return UserID;
         }
 
 
@@ -86,7 +85,7 @@ namespace DVLDDataAccessLayer
         }
 
 
-        public static bool UpdateUser(int UserID, int PersonID, string UserName, string Password, byte IsActive)
+        public static bool UpdateUser(int UserID, int PersonID, string UserName, string Password, bool IsActive)
         {
             int RowsAffectived = -1;
 
@@ -130,7 +129,7 @@ namespace DVLDDataAccessLayer
         }
 
 
-        public static bool GetUserInfoByUserID(int UserID, ref int PersonID, ref string UserName, ref string Password, ref byte IsActive)
+        public static bool GetUserInfoByUserID(int UserID, ref int PersonID, ref string UserName, ref string Password, ref bool IsActive)
         {
             bool IsFound = false;
 
@@ -157,7 +156,7 @@ namespace DVLDDataAccessLayer
                     PersonID = (int)Reader["PersonID"];
                     UserName = (string)Reader["UserName"];
                     Password = (string)Reader["Password"];
-                    IsActive = (byte)Reader["IsActive"];
+                    IsActive = (bool)Reader["IsActive"];
 
                 }
                 else

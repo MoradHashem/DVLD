@@ -29,11 +29,21 @@ namespace DVLDPresentationLayer
             InitializeComponent();
         }
 
-        private void SearchForPerson(string FilterValue)
+        private bool SearchForPerson(string FilterValue)
         {
 
+            if (string.IsNullOrWhiteSpace(FilterValue))
+                return false;
+
+
             if ((Person = clsPeople.FindPersonByID(Convert.ToInt32(FilterValue))) == null)
-                        MessageBox.Show($"No Person with ID = {FilterValue}");
+            {
+
+                MessageBox.Show($"No Person with ID = {FilterValue}");
+                return false;
+            }
+
+            return true;
 
         }
 
@@ -68,9 +78,16 @@ namespace DVLDPresentationLayer
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            SearchForPerson(txtFind.Text.Trim());
+            if (SearchForPerson(txtFind.Text.Trim()))
+                PersonFound?.Invoke(this, Person.PersonID);
+        }
 
-            PersonFound?.Invoke(this, Person.PersonID);
+        private void txtFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

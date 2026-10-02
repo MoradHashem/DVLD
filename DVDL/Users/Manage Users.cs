@@ -155,6 +155,7 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditNewUser();
 
             frm.ShowDialog();
+            _RefrashUsersList();
         }
     }
 }

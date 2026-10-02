@@ -78,6 +78,7 @@
             this.txtFind.Size = new System.Drawing.Size(222, 24);
             this.txtFind.TabIndex = 42;
             this.txtFind.TextChanged += new System.EventHandler(this.txtFind_TextChanged);
+            this.txtFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFind_KeyPress);
             // 
             // cmbFindBy
             // 
