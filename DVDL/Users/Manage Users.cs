@@ -157,5 +157,26 @@ namespace DVLDPresentationLayer
             frm.ShowDialog();
             _RefrashUsersList();
         }
+
+        private void tsmiAddNewPerson_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmAddEditNewUser();
+
+            frm.ShowDialog();
+            _RefrashUsersList();
+        }
+
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
+
+            if (MessageBox.Show($"Are you sure you want to delete user [ {UserID} ]", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (clsUsers.DeleteUser(UserID))
+                    MessageBox.Show("User Deleted Successfully.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            _RefrashUsersList();
+        }
     }
 }

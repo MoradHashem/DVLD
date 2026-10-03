@@ -50,7 +50,7 @@ namespace DVLDDataAccessLayer
         }
 
 
-        public static bool DeleteUser(int PersonID)
+        public static bool DeleteUser(int UserID)
         {
             int RowsAffectived = -1;
 
@@ -61,7 +61,7 @@ namespace DVLDDataAccessLayer
             SqlCommand Command = new SqlCommand(Query, Connection);
 
 
-            Command.Parameters.AddWithValue("@PersonID", PersonID);
+            Command.Parameters.AddWithValue("@UserID", UserID);
 
 
             try
