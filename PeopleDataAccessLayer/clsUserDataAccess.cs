@@ -92,7 +92,7 @@ namespace DVLDDataAccessLayer
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string Query = @"UPDATE Users 
-                             SET UserID = @UserID,
+                             SET
                                  PersonID = @PersonID,
                                  UserName = @UserName,
                                  Password = @Password,

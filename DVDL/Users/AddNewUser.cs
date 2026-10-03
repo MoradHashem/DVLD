@@ -31,6 +31,11 @@ namespace DVLDPresentationLayer
             else
                 _Mode = _enMode.Update;
 
+            if (_Mode == _enMode.AddNew)
+                lblTitle.Text = "Add New User";
+            else
+                lblTitle.Text = "Update User";
+
         }
 
 
@@ -47,8 +52,6 @@ namespace DVLDPresentationLayer
         public frmAddEditNewUser(int UserID)
         {
             InitializeComponent();
-
-            usctrlFilter1.PersonFound += frmAddNewUser_PersonFound;
 
             _MakeMode(UserID);
 
@@ -80,12 +83,18 @@ namespace DVLDPresentationLayer
 
 
             
-
+            usctrlFilter1.SetPersonIDIntxtFind(_User.PersonID);
+            usctrlFilter1.Enabled = false;
+            usctrlPersonDetails1.LoadPersonInfo(_User.PersonID);
             lblUserIDValue.Text = _User.UserID.ToString();
             txtUserName.Text = _User.UserName;
             txtPassword.Text = _User.Password;
             txtConfirmPassword.Text = _User.Password;
             ckIsActive.Checked = _User.IsActive;
+            _PersonID = _User.PersonID;
+
+
+            _User.Mode = (clsUsers._enMode)_Mode;
 
 
 
@@ -154,11 +163,6 @@ namespace DVLDPresentationLayer
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (_PersonID == -1)
-            {
-                MessageBox.Show("Please select a person first.");
-                return;
-            }
             
             tcAddNewUser.SelectedTab = tpLoginInfo;
         }

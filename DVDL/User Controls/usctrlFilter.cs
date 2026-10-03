@@ -22,7 +22,10 @@ namespace DVLDPresentationLayer
 
 
 
-
+        public void SetPersonIDIntxtFind(int PersonID)
+        {
+            txtFind.Text = PersonID.ToString();
+        }
 
         public usctrlFilter()
         {
@@ -52,12 +55,15 @@ namespace DVLDPresentationLayer
         {
             txtFind.Text = PersonID.ToString();
 
+            
+
         }
 
 
         private void usctrlFilter_Load(object sender, EventArgs e)
         {
             cmbFindBy.SelectedIndex = 0;
+
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)

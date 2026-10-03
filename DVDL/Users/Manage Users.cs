@@ -28,6 +28,16 @@ namespace DVLDPresentationLayer
             _Users = clsUsers.ListUsers();
 
             dgvListUsers.DataSource = _Users;
+
+            dgvListUsers.Columns.Remove("Is Active");
+
+            DataGridViewCheckBoxColumn chkIsActive = new DataGridViewCheckBoxColumn();
+            chkIsActive.Name = "Is Active";
+            chkIsActive.HeaderText = "Is Active";
+            chkIsActive.DataPropertyName = "Is Active";
+
+            dgvListUsers.Columns.Add(chkIsActive);
+
             lblCount.Text = dgvListUsers.RowCount.ToString();
             dgvListUsers.Columns["Full Name"].Width = 250;
         }
@@ -176,6 +186,16 @@ namespace DVLDPresentationLayer
                     MessageBox.Show("User Deleted Successfully.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+            _RefrashUsersList();
+        }
+
+        private void tsmiEdit_Click(object sender, EventArgs e)
+        {
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
+
+            frmAddEditNewUser frm = new frmAddEditNewUser(UserID);
+
+            frm.ShowDialog();
             _RefrashUsersList();
         }
     }
