@@ -50,11 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Users\AddNewUser.cs">
+    <Compile Include="User Controls\usctrlLoginInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\usctrlLoginInformation.Designer.cs">
+      <DependentUpon>usctrlLoginInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\User Information.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\AddNewUser.Designer.cs">
-      <DependentUpon>AddNewUser.cs</DependentUpon>
+    <Compile Include="Users\User Information.Designer.cs">
+      <DependentUpon>User Information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Add New User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users\Add New User.Designer.cs">
+      <DependentUpon>Add New User.cs</DependentUpon>
     </Compile>
     <Compile Include="User Controls\usctrlFilter.cs">
       <SubType>UserControl</SubType>
@@ -68,23 +80,23 @@
     <Compile Include="Users\Manage Users.Designer.cs">
       <DependentUpon>Manage Users.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\AddEditPersonInfo.cs">
+    <Compile Include="People\Add Edit Person Info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\AddEditPersonInfo.Designer.cs">
-      <DependentUpon>AddEditPersonInfo.cs</DependentUpon>
+    <Compile Include="People\Add Edit Person Info.Designer.cs">
+      <DependentUpon>Add Edit Person Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\ManagePeopleScreen.cs">
+    <Compile Include="People\Manage People Screen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="People\ManagePeopleScreen.Designer.cs">
-      <DependentUpon>ManagePeopleScreen.cs</DependentUpon>
+    <Compile Include="People\Manage People Screen.Designer.cs">
+      <DependentUpon>Manage People Screen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main Screen\MainScreen.cs">
+    <Compile Include="Main Screen\Main Screen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main Screen\.Designer.cs">
-      <DependentUpon>MainScreen.cs</DependentUpon>
+      <DependentUpon>Main Screen.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="People\Person Details.cs">
@@ -106,8 +118,14 @@
     <Compile Include="User Controls\usctrPersonDetails.Designer.cs">
       <DependentUpon>usctrPersonDetails.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Users\AddNewUser.resx">
-      <DependentUpon>AddNewUser.cs</DependentUpon>
+    <EmbeddedResource Include="User Controls\usctrlLoginInformation.resx">
+      <DependentUpon>usctrlLoginInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\User Information.resx">
+      <DependentUpon>User Information.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users\Add New User.resx">
+      <DependentUpon>Add New User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\usctrlFilter.resx">
       <DependentUpon>usctrlFilter.cs</DependentUpon>
@@ -115,14 +133,14 @@
     <EmbeddedResource Include="Users\Manage Users.resx">
       <DependentUpon>Manage Users.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\AddEditPersonInfo.resx">
-      <DependentUpon>AddEditPersonInfo.cs</DependentUpon>
+    <EmbeddedResource Include="People\Add Edit Person Info.resx">
+      <DependentUpon>Add Edit Person Info.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main Screen\MainScreen.resx">
-      <DependentUpon>MainScreen.cs</DependentUpon>
+    <EmbeddedResource Include="Main Screen\Main Screen.resx">
+      <DependentUpon>Main Screen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="People\ManagePeopleScreen.resx">
-      <DependentUpon>ManagePeopleScreen.cs</DependentUpon>
+    <EmbeddedResource Include="People\Manage People Screen.resx">
+      <DependentUpon>Manage People Screen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="People\Person Details.resx">
       <DependentUpon>Person Details.cs</DependentUpon>

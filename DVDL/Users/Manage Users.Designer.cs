@@ -35,20 +35,20 @@
             this.lblFilterBy = new System.Windows.Forms.Label();
             this.dgvListUsers = new System.Windows.Forms.DataGridView();
             this.cmsManagePeople = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiShowDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiAddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSendEmail = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblRecords = new System.Windows.Forms.Label();
             this.cmbFilterIsActive = new System.Windows.Forms.ComboBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
-            this.tsmiShowDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiAddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSendEmail = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.ptrManagePeopleImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListUsers)).BeginInit();
             this.cmsManagePeople.SuspendLayout();
@@ -135,15 +135,75 @@
             this.cmsManagePeople.Name = "cmsManagePeople";
             this.cmsManagePeople.Size = new System.Drawing.Size(215, 226);
             // 
+            // tsmiShowDetails
+            // 
+            this.tsmiShowDetails.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiShowDetails.Image = global::DVLDPresentationLayer.Properties.Resources.PersonDetails_32;
+            this.tsmiShowDetails.Name = "tsmiShowDetails";
+            this.tsmiShowDetails.Size = new System.Drawing.Size(214, 26);
+            this.tsmiShowDetails.Text = "Show Details";
+            this.tsmiShowDetails.Click += new System.EventHandler(this.tsmiShowDetails_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
             // 
+            // tsmiAddNewPerson
+            // 
+            this.tsmiAddNewPerson.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiAddNewPerson.Image = global::DVLDPresentationLayer.Properties.Resources.Add_Person_40;
+            this.tsmiAddNewPerson.Name = "tsmiAddNewPerson";
+            this.tsmiAddNewPerson.Size = new System.Drawing.Size(214, 26);
+            this.tsmiAddNewPerson.Text = "Add New User";
+            this.tsmiAddNewPerson.Click += new System.EventHandler(this.tsmiAddNewPerson_Click);
+            // 
+            // tsmiEdit
+            // 
+            this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiEdit.Image = global::DVLDPresentationLayer.Properties.Resources.edit_32;
+            this.tsmiEdit.Name = "tsmiEdit";
+            this.tsmiEdit.Size = new System.Drawing.Size(214, 26);
+            this.tsmiEdit.Text = "Edit";
+            this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
+            // 
+            // tsmiDelete
+            // 
+            this.tsmiDelete.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiDelete.Image = global::DVLDPresentationLayer.Properties.Resources.Delete_32;
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(214, 26);
+            this.tsmiDelete.Text = "Delete";
+            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(214, 26);
+            this.toolStripMenuItem1.Text = "Change Password";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            // 
+            // tsmiSendEmail
+            // 
+            this.tsmiSendEmail.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiSendEmail.Image = global::DVLDPresentationLayer.Properties.Resources.send_email_32;
+            this.tsmiSendEmail.Name = "tsmiSendEmail";
+            this.tsmiSendEmail.Size = new System.Drawing.Size(214, 26);
+            this.tsmiSendEmail.Text = "Send Email";
+            // 
+            // tsmiPhoneCall
+            // 
+            this.tsmiPhoneCall.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiPhoneCall.Image = global::DVLDPresentationLayer.Properties.Resources.call_32;
+            this.tsmiPhoneCall.Name = "tsmiPhoneCall";
+            this.tsmiPhoneCall.Size = new System.Drawing.Size(214, 26);
+            this.tsmiPhoneCall.Text = "Phone Call";
             // 
             // lblCount
             // 
@@ -200,65 +260,6 @@
             this.btnAddUser.TabIndex = 14;
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
-            // 
-            // tsmiShowDetails
-            // 
-            this.tsmiShowDetails.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiShowDetails.Image = global::DVLDPresentationLayer.Properties.Resources.PersonDetails_32;
-            this.tsmiShowDetails.Name = "tsmiShowDetails";
-            this.tsmiShowDetails.Size = new System.Drawing.Size(214, 26);
-            this.tsmiShowDetails.Text = "Show Details";
-            // 
-            // tsmiAddNewPerson
-            // 
-            this.tsmiAddNewPerson.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiAddNewPerson.Image = global::DVLDPresentationLayer.Properties.Resources.Add_Person_40;
-            this.tsmiAddNewPerson.Name = "tsmiAddNewPerson";
-            this.tsmiAddNewPerson.Size = new System.Drawing.Size(214, 26);
-            this.tsmiAddNewPerson.Text = "Add New User";
-            this.tsmiAddNewPerson.Click += new System.EventHandler(this.tsmiAddNewPerson_Click);
-            // 
-            // tsmiEdit
-            // 
-            this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiEdit.Image = global::DVLDPresentationLayer.Properties.Resources.edit_32;
-            this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(214, 26);
-            this.tsmiEdit.Text = "Edit";
-            this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
-            // 
-            // tsmiDelete
-            // 
-            this.tsmiDelete.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiDelete.Image = global::DVLDPresentationLayer.Properties.Resources.Delete_32;
-            this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(214, 26);
-            this.tsmiDelete.Text = "Delete";
-            this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(214, 26);
-            this.toolStripMenuItem1.Text = "Change Password";
-            // 
-            // tsmiSendEmail
-            // 
-            this.tsmiSendEmail.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiSendEmail.Image = global::DVLDPresentationLayer.Properties.Resources.send_email_32;
-            this.tsmiSendEmail.Name = "tsmiSendEmail";
-            this.tsmiSendEmail.Size = new System.Drawing.Size(214, 26);
-            this.tsmiSendEmail.Text = "Send Email";
-            // 
-            // tsmiPhoneCall
-            // 
-            this.tsmiPhoneCall.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsmiPhoneCall.Image = global::DVLDPresentationLayer.Properties.Resources.call_32;
-            this.tsmiPhoneCall.Name = "tsmiPhoneCall";
-            this.tsmiPhoneCall.Size = new System.Drawing.Size(214, 26);
-            this.tsmiPhoneCall.Text = "Phone Call";
             // 
             // ptrManagePeopleImage
             // 
