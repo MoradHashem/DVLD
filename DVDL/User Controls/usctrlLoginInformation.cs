@@ -22,7 +22,7 @@ namespace DVLDPresentationLayer
         {
             this.UserID = UserID;
 
-            _LoadDate();
+            _LoadData();
         }
 
         public usctrlLoginInformation()
@@ -31,7 +31,7 @@ namespace DVLDPresentationLayer
         }
 
 
-        private void _LoadDate()
+        private void _LoadData()
         {
             _User = clsUsers.FindUserByID(UserID);
 
@@ -55,7 +55,7 @@ namespace DVLDPresentationLayer
             if (UserID <= 0)
                 return;
 
-            _LoadDate();
+            _LoadData();
         }
     }
 }

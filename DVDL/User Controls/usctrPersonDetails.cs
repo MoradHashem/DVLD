@@ -27,11 +27,11 @@ namespace DVLDPresentationLayer
         public void LoadPersonInfo(int PersonID)
         {
             this.PersonID = PersonID;
-            _LoadDate();
+            _LoadData();
         }
 
 
-        private void _LoadDate()
+        private void _LoadData()
         {
             
 
@@ -80,7 +80,7 @@ namespace DVLDPresentationLayer
             if (PersonID <= 0)
                 return;
 
-            _LoadDate();
+            _LoadData();
         }
 
         private void lnkEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -89,7 +89,7 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditPersonInfo(PersonID);
 
             frm.ShowDialog();
-            _LoadDate();
+            _LoadData();
             
         }
 

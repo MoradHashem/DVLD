@@ -199,12 +199,22 @@ namespace DVLDPresentationLayer
             _RefrashUsersList();
         }
 
-        private void tsmiShowDetails_Click(object sender, EventArgs e)
+        private void tsmiShowDetails_Click(object sender, EventArgs e)  
         {
             int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
             int PersonID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["Person ID"].Value);
 
             frmUserInformation frm = new frmUserInformation(UserID, PersonID);
+
+            frm.ShowDialog();
+        }
+
+        private void tsmiChangePassword_Click(object sender, EventArgs e)
+        {
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
+            int PersonID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["Person ID"].Value);
+
+            frmChangePassword frm = new frmChangePassword(UserID, PersonID);
 
             frm.ShowDialog();
         }

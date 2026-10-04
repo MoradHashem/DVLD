@@ -40,7 +40,7 @@
             this.tsmiAddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChangePassword = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiSendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +128,7 @@
             this.tsmiAddNewPerson,
             this.tsmiEdit,
             this.tsmiDelete,
-            this.toolStripMenuItem1,
+            this.tsmiChangePassword,
             this.toolStripSeparator2,
             this.tsmiSendEmail,
             this.tsmiPhoneCall});
@@ -176,13 +176,14 @@
             this.tsmiDelete.Text = "Delete";
             this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
             // 
-            // toolStripMenuItem1
+            // tsmiChangePassword
             // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(214, 26);
-            this.toolStripMenuItem1.Text = "Change Password";
+            this.tsmiChangePassword.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsmiChangePassword.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
+            this.tsmiChangePassword.Name = "tsmiChangePassword";
+            this.tsmiChangePassword.Size = new System.Drawing.Size(214, 26);
+            this.tsmiChangePassword.Text = "Change Password";
+            this.tsmiChangePassword.Click += new System.EventHandler(this.tsmiChangePassword_Click);
             // 
             // toolStripSeparator2
             // 
@@ -324,6 +325,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiSendEmail;
         private System.Windows.Forms.ToolStripMenuItem tsmiPhoneCall;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChangePassword;
     }
 }
