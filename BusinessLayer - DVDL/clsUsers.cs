@@ -123,6 +123,28 @@ namespace DVLDBusinessLayer
 
 
 
+        public static clsUsers FindUserByUserName(string UserName)
+        {
+            string Password = "";
+            bool IsActive = true;
+            int PersonID = -1, UserID = -1;
+
+
+            if (clsUserDataAccess.GetUserInfoByUserName(ref UserID, ref PersonID, UserName, ref Password, ref IsActive))
+
+
+                return new clsUsers(UserID, PersonID, UserName, Password, IsActive);
+
+
+            else
+
+                return null;
+
+        }
+
+
+
+
         public static DataTable ListUsers()
         {
 

@@ -185,6 +185,62 @@ namespace DVLDDataAccessLayer
         }
 
 
+        public static bool GetUserInfoByUserName(ref int UserID, ref int PersonID, string UserName, ref string Password, ref bool IsActive)
+        {
+            bool IsFound = false;
+
+            SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string Query = "SELECT * FROM Users WHERE UserName = @UserName";
+
+            SqlCommand Command = new SqlCommand(Query, Connection);
+
+            Command.Parameters.AddWithValue("@UserName", UserName);
+
+
+            try
+            {
+                Connection.Open();
+
+                SqlDataReader Reader = Command.ExecuteReader();
+
+                if (Reader.Read())
+                {
+                    IsFound = true;
+
+                    UserID = (int)Reader["UserID"];
+                    PersonID = (int)Reader["PersonID"];
+                    UserName = (string)Reader["UserName"];
+                    Password = (string)Reader["Password"];
+                    IsActive = (bool)Reader["IsActive"];
+
+                }
+                else
+                {
+                    IsFound = false;
+                }
+
+
+
+                Reader.Close();
+            }
+            catch
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                Connection.Close();
+            }
+
+
+
+
+
+            return IsFound;
+        }
+
+
         public static DataTable ListUsers()
         {
             DataTable dtUsers = new DataTable();

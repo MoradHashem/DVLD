@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login Screen\Login Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login Screen\Login Screen.Designer.cs">
+      <DependentUpon>Login Screen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users\Change Password.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     <Compile Include="User Controls\usctrPersonDetails.Designer.cs">
       <DependentUpon>usctrPersonDetails.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Login Screen\Login Screen.resx">
+      <DependentUpon>Login Screen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Users\Change Password.resx">
       <DependentUpon>Change Password.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +291,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Password 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DVDL.ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign_in 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
