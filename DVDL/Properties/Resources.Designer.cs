@@ -313,6 +313,16 @@ namespace DVLDPresentationLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap PersonDetails_321 {
+            get {
+                object obj = ResourceManager.GetObject("PersonDetails 321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Phone_32 {
             get {
                 object obj = ResourceManager.GetObject("Phone 32", resourceCulture);
@@ -356,6 +366,16 @@ namespace DVLDPresentationLayer.Properties {
         public static System.Drawing.Bitmap sign_in_32 {
             get {
                 object obj = ResourceManager.GetObject("sign_in 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap sign_out_32__2 {
+            get {
+                object obj = ResourceManager.GetObject("sign_out 32 -2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

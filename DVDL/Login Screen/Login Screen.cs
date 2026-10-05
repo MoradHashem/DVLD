@@ -16,12 +16,6 @@ namespace DVLDPresentationLayer
         private clsUsers _User;
 
 
-        public int GetUserID()
-        {
-            return _User.UserID;
-        }
-
-
         public frmLoginScreen()
         {
             InitializeComponent();

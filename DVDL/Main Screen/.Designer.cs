@@ -35,6 +35,10 @@
             this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCurrentUserInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChangePassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSignOut = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,12 +97,49 @@
             // 
             // accountSettingsToolStripMenuItem
             // 
+            this.accountSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCurrentUserInfo,
+            this.tsmiChangePassword,
+            this.toolStripSeparator1,
+            this.tsmiSignOut});
             this.accountSettingsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.accountSettingsToolStripMenuItem.Image = global::DVLDPresentationLayer.Properties.Resources.account_settings_64;
             this.accountSettingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
             this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(213, 68);
             this.accountSettingsToolStripMenuItem.Text = "Account Settings";
+            // 
+            // tsmiCurrentUserInfo
+            // 
+            this.tsmiCurrentUserInfo.Image = global::DVLDPresentationLayer.Properties.Resources.PersonDetails_321;
+            this.tsmiCurrentUserInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiCurrentUserInfo.Name = "tsmiCurrentUserInfo";
+            this.tsmiCurrentUserInfo.Size = new System.Drawing.Size(239, 38);
+            this.tsmiCurrentUserInfo.Text = "Current User Info";
+            this.tsmiCurrentUserInfo.Click += new System.EventHandler(this.currentUserInfoToolStripMenuItem_Click);
+            // 
+            // tsmiChangePassword
+            // 
+            this.tsmiChangePassword.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
+            this.tsmiChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiChangePassword.Name = "tsmiChangePassword";
+            this.tsmiChangePassword.Size = new System.Drawing.Size(239, 38);
+            this.tsmiChangePassword.Text = "Change Password";
+            this.tsmiChangePassword.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(236, 6);
+            // 
+            // tsmiSignOut
+            // 
+            this.tsmiSignOut.Image = global::DVLDPresentationLayer.Properties.Resources.sign_out_32__2;
+            this.tsmiSignOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiSignOut.Name = "tsmiSignOut";
+            this.tsmiSignOut.Size = new System.Drawing.Size(239, 38);
+            this.tsmiSignOut.Text = "Sign Out";
+            this.tsmiSignOut.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
             // MainScreen
             // 
@@ -128,5 +169,9 @@
         private System.Windows.Forms.ToolStripMenuItem driversToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCurrentUserInfo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChangePassword;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSignOut;
     }
 }
