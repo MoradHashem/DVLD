@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using DVLDDataAccessLayer;
 
 namespace DVLDBusinessLayer
@@ -17,14 +18,26 @@ namespace DVLDBusinessLayer
         public string SecondName { set; get; }
         public string ThirdName { set; get; }
         public string LastName { set; get; }
+        public string FullName
+        {
+            get { return FirstName + " " + SecondName + " " + ThirdName + " " + LastName; }
+        }
         public string NationalNo { set; get; }
         public DateTime DateOfBirth { set; get; }
         public byte Gendor { set; get; }
         public string Phone { set; get; }
         public string Email { set; get; }
-        public int Country { set; get; }
+        public int NationalityCountryID { set; get; }
         public string Address { set; get; }
-        public string ImagePath { set; get; }
+        public string ImagePath 
+        {
+            set { _ImagePath = value; }
+            get { return _ImagePath; }
+        }
+
+        public clsCountry CountryInfo;
+
+        private string _ImagePath;
 
 
 
@@ -41,7 +54,7 @@ namespace DVLDBusinessLayer
             this.Gendor = 0;
             this.Phone = "";
             this.Email = "";
-            this.Country = -1;
+            this.NationalityCountryID = -1;
             this.Address = "";
             this.ImagePath = "";
 
@@ -51,7 +64,7 @@ namespace DVLDBusinessLayer
 
 
         private clsPeople(int PersonID, string FirstName, string SecondName, string ThirdName, string LastName, string NationalNo,
-                         DateTime DateOfBirth, byte Gendor, string Phone, string Email, int Country, string Address, string ImagePath)
+                         DateTime DateOfBirth, byte Gendor, string Phone, string Email, int NationalityCountryID, string Address, string ImagePath)
         {
             this.PersonID = PersonID;
             this.FirstName = FirstName;
@@ -63,9 +76,10 @@ namespace DVLDBusinessLayer
             this.Gendor = Gendor;
             this.Phone = Phone;
             this.Email = Email;
-            this.Country = Country;
+            this.NationalityCountryID = NationalityCountryID;
             this.Address = Address;
             this.ImagePath = ImagePath;
+            this.CountryInfo = clsCountry.Find(NationalityCountryID);
 
             Mode = _enMode.Update;
         }
@@ -77,7 +91,7 @@ namespace DVLDBusinessLayer
         private bool _AddNewPerson()
         {
              this.PersonID = clsPeopleDataAccess.AddNewPerson(this.FirstName, this.SecondName, this.ThirdName, this.LastName, this.NationalNo,
-                                                              this.DateOfBirth, this.Gendor, this.Phone, this.Email, this.Country, this.Address,
+                                                              this.DateOfBirth, this.Gendor, this.Phone, this.Email, this.NationalityCountryID, this.Address,
                                                               this.ImagePath);
 
             return (PersonID != -1);
@@ -88,7 +102,7 @@ namespace DVLDBusinessLayer
         private bool _UpdateInfo()
         {
             return (clsPeopleDataAccess.UpdatePerson(this.PersonID, this.FirstName, this.SecondName, this.ThirdName, this.LastName, 
-                                                      this.NationalNo, this.DateOfBirth, this.Gendor, this.Phone, this.Email, this.Country,
+                                                      this.NationalNo, this.DateOfBirth, this.Gendor, this.Phone, this.Email, this.NationalityCountryID,
                                                       this.Address, this.ImagePath));
         }
 
@@ -125,27 +139,77 @@ namespace DVLDBusinessLayer
 
 
 
-        public static bool DeletePerson(int PersonID)
+        public static bool DeletePerson(int PersonID)   
         {
 
-            return (clsPeopleDataAccess.DeletePerson(PersonID));
+            clsPeople Person = clsPeople.Find(PersonID);
+
+            if (Person == null)
+                return false;
+
+            string ImagePath = Person.ImagePath;
+
+            if (clsPeopleDataAccess.DeletePerson(PersonID))
+            {
+                if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+                {
+                    try
+                    {
+                        File.Delete(ImagePath);
+                    }
+                    catch (IOException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+
 
 
         }
 
 
 
-        public static clsPeople FindPersonByID(int PersonID)
+        public static clsPeople Find(int PersonID)
         {
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "",
                    Email = "", Address = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
             byte Gendor = 0;
-            int Country = -1;
+            int NationalityCountryID = -1;
 
 
             if (clsPeopleDataAccess.GetPersonInfoByPersonID(PersonID, ref FirstName, ref SecondName, ref ThirdName,
                                            ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
+                                            ref NationalityCountryID, ref Address, ref ImagePath))
+
+                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
+                                 DateOfBirth, Gendor, Phone, Email, NationalityCountryID, Address, ImagePath);
+
+
+            else
+
+                return null;
+
+        }
+
+
+
+        public static clsPeople Find(string NationalNo)
+        {
+            string SecondName = "", FirstName = "", LastName = "", ThirdName = "", Phone = "",
+                   Email = "", Address = "", ImagePath = "";
+            DateTime DateOfBirth = DateTime.Now;
+            byte Gendor = 0;
+            int Country = -1, PersonID = -1;
+
+
+            if (clsPeopleDataAccess.GetPersonInfoByNationalNo(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
+                                           ref LastName,  NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
                                             ref Country, ref Address, ref ImagePath))
 
                 return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
@@ -159,308 +223,22 @@ namespace DVLDBusinessLayer
         }
 
 
-        //public static DataTable FindPeopleByPersonID(int PersonID)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByPersonID(PersonID);
-        //}
-
-
-        public static clsPeople FindPersonByFirstName(string FirstName)
-        {
-            string SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByFirstName(ref PersonID,  FirstName, ref SecondName, ref ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByFirstName(string FirstName)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByFirstName(FirstName);
-        //}
-
-
-        public static clsPeople FindPersonBySecondName(string SecondName)
-        {
-            string FirstName = "", ThirdName = "", LastName = "", NationalNo = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoBySecondName(ref PersonID, ref FirstName, SecondName, ref ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleBySecondName(string SecondName)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleBySecondName(SecondName);
-        //}
-
-
-        public static clsPeople FindPersonByThirdName(string ThirdName)
-        {
-            string SecondName = "", FirstName = "", LastName = "", NationalNo = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByThirdName(ref PersonID, ref FirstName, ref SecondName, ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByThirdName(string ThirdName)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByThirdName(ThirdName);
-        //}
-
-
-        public static clsPeople FindPersonByLastName(string LastName)
-        {
-            string SecondName = "", FirstName = "", ThirdName = "", NationalNo = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByLastName(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
-                                           LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByLastName(string LastName)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByLastName(LastName);
-        //}
-
-
-        public static clsPeople FindPersonByNationalNo(string NationalNo)
-        {
-            string SecondName = "", FirstName = "", LastName = "", ThirdName = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByNationalNo(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
-                                           ref LastName,  NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByNationalNo(string NationalNo)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByNationalNo(NationalNo);
-        //}
-
-
-        //public static DataTable FindPeopleByGendor(byte Gendor)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByGendor(Gendor);
-        //}
-
-
-        public static clsPeople FindPersonByPhone(string Phone)
-        {
-            string SecondName = "", FirstName = "", LastName = "", NationalNo = "", ThirdName = "",
-                   Email = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByPhone(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor,  Phone, ref Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByPhone(string Phone)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByPhone(Phone);
-        //}
-
-
-        public static clsPeople FindPersonByEmail(string Email)
-        {
-            string SecondName = "", FirstName = "", LastName = "", NationalNo = "", Phone = "",
-                   ThirdName = "", Address = "", ImagePath = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int Country = -1, PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByEmail(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone,  Email,
-                                            ref Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByEmail(string Email)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByEmail(Email);
-        //}
-
-
-        public static clsPeople FindPersonByCountry(int Country)
-        {
-            string SecondName = "", FirstName = "", LastName = "", NationalNo = "", Phone = "",
-                   Email = "", Address = "", ImagePath = "", ThirdName = "";
-            DateTime DateOfBirth = DateTime.Now;
-            byte Gendor = 0;
-            int PersonID = -1;
-
-
-            if (clsPeopleDataAccess.GetPersonInfoByCountry(ref PersonID, ref FirstName, ref SecondName, ref ThirdName,
-                                           ref LastName, ref NationalNo, ref DateOfBirth, ref Gendor, ref Phone, ref Email,
-                                             Country))
-
-                return new clsPeople(PersonID, FirstName, SecondName, ThirdName, LastName, NationalNo,
-                                 DateOfBirth, Gendor, Phone, Email, Country, Address, ImagePath);
-
-
-            else
-
-                return null;
-
-        }
-
-
-        //public static DataTable FindPeopleByNationality(int NationalityCountryID)
-        //{
-        //    return clsPeopleDataAccess.GetPeopleByNationality(NationalityCountryID);
-        //}
-
-
         public static DataTable ListPeople()
         {
             
-            DataTable dtPeople = clsPeopleDataAccess.ListPeople();
-
-            DataTable dtNew = new DataTable();
-
-
-            dtNew.Columns.Add("PersonID");
-            dtNew.Columns.Add("NationalNo");
-            dtNew.Columns.Add("FirstName");
-            dtNew.Columns.Add("SecondName");
-            dtNew.Columns.Add("ThirdName");
-            dtNew.Columns.Add("LastName");
-            dtNew.Columns.Add("Gendor");
-            dtNew.Columns.Add("DateOfBirth");
-            dtNew.Columns.Add("NationalityCountryID");
-            dtNew.Columns.Add("Phone");
-            dtNew.Columns.Add("Email");
-
-
-            foreach (DataRow Row in dtPeople.Rows)
-            {
-                DataRow NewRow = dtNew.NewRow();
-
-                NewRow["PersonID"] = Row["PersonID"];
-                NewRow["NationalNo"] = Row["NationalNo"];
-                NewRow["FirstName"] = Row["FirstName"];
-                NewRow["SecondName"] = Row["SecondName"];
-                NewRow["ThirdName"] = Row["ThirdName"];
-                NewRow["LastName"] = Row["LastName"];
-                NewRow["Gendor"] = Convert.ToBoolean(Row["Gendor"]) ? "Female" : "Male";
-                NewRow["DateOfBirth"] = Row["DateOfBirth"];
-                NewRow["NationalityCountryID"] = clsCountry.FindCountryByID(Convert.ToInt32(Row["NationalityCountryID"])).CountryName;
-                NewRow["Phone"] = Row["Phone"];
-                NewRow["Email"] = Row["Email"];
-
-
-                dtNew.Rows.Add(NewRow);
-
-            }
-
-
-
-
-
-            return dtNew;
+            return clsPeopleDataAccess.ListPeople();
         }
 
 
+        public static bool IsPersonExist(string NationalNo)
+        {
+            return clsPeopleDataAccess.IsPersonExist(NationalNo);
+        }
+
+        public static bool IsPersonExist(int PersonID)
+        {
+            return clsPeopleDataAccess.IsPersonExist(PersonID);
+        }
 
     }
 }

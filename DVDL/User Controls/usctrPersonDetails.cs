@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
 using DVLDPresentationLayer.Properties;
+using System.IO;
+
 
 namespace DVLDPresentationLayer
 {
@@ -19,88 +21,113 @@ namespace DVLDPresentationLayer
             InitializeComponent();
         }
 
-        public int PersonID;
+        private int _PersonID = -1;
         private clsPeople _Person;
 
+        public int PersonID
+        {
+            get { return _PersonID; }
+        }
+
+
+        public clsPeople SelectedPersonInfo
+        {
+            get { return _Person; }
+        }
+
+
+        public void ResetPersonInfo()
+        {
+            _PersonID = -1;
+            lblID.Text = "[????]";
+            lblNationalNum.Text = "[????]";
+            lblFullName.Text = "[????]";
+            pbGendor.Image = Resources.Man_32;
+            lblGendors.Text = "[????]";
+            lblEmails.Text = "[????]";
+            lblPhones.Text = "[????]";
+            lblDateOfBirth1.Text = "[????]";
+            lblCountries.Text = "[????]";
+            lblAddresss.Text = "[????]";
+            pbPersonImage.Image = Resources.Male_512;
+        }
+
+
+        private void _FillPersonInfo()
+        {
+            lnkEditPersonInfo.Enabled = true;
+            _PersonID = _Person.PersonID;
+            lblID.Text = _PersonID.ToString();
+            lblNationalNum.Text = _Person.NationalNo;
+            lblFullName.Text = _Person.FullName;
+            lblGendors.Text = _Person.Gendor == 0 ? "Male" : "Femal";
+            lblEmails.Text = _Person.Email;
+            lblPhones.Text = _Person.Phone;
+            lblDateOfBirth1.Text = _Person.DateOfBirth.ToShortDateString();
+            lblCountries.Text = _Person.CountryInfo.CountryName;
+            lblAddresss.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
+
+            _LoadPersonImage();
+        }
 
 
         public void LoadPersonInfo(int PersonID)
         {
-            this.PersonID = PersonID;
-            _LoadData();
-        }
-
-
-        private void _LoadData()
-        {
-            
-
-            _Person = clsPeople.FindPersonByID(PersonID);
+            _Person = clsPeople.Find(PersonID);
 
             if (_Person == null)
             {
-                MessageBox.Show("This form will be closed because no Person with " + PersonID);
-                this.FindForm().Close();
-
+                ResetPersonInfo();
+                MessageBox.Show("No Person with PersonID = " + PersonID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-
-            lblID.Text = PersonID.ToString();
-            lblFullName.Text = _Person.FirstName.ToString() + " " + _Person.SecondName.ToString() + " " + _Person.ThirdName.ToString() + " " + _Person.LastName.ToString();
-            lblNationalNum.Text = _Person.NationalNo;
-            lblEmails.Text = _Person.Email;
-            lblAddresss.Text = _Person.Address;
-            lblPhones.Text = _Person.Phone;
-            lblDateOfBirth1.Text = _Person.DateOfBirth.ToString();
-            lblCountries.Text = clsCountry.FindCountryByID(_Person.Country).CountryName;
-
-            if (_Person.Gendor == 0)
-            {
-                lblGendors.Text = "Male";
-            }
-            else
-                lblGendors.Text = "Female";
-
-
-            if (!string.IsNullOrEmpty(_Person.ImagePath))
-                ptrImage.Load(_Person.ImagePath);
-
-            else
-                ptrImage.Image = Resources.Male_512;
-
-
+            _FillPersonInfo();
         }
 
-       
-        private void UserControl1_Load(object sender, EventArgs e)
+
+        public void LoadPersonInfo(string NationalNo)
         {
-            ptrImage.Image = Resources.Male_512;
+            _Person = clsPeople.Find(NationalNo);
 
-            if (PersonID <= 0)
+            if (_Person == null)
+            {
+                ResetPersonInfo();
+                MessageBox.Show("No Person with National No = " + PersonID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
 
-            _LoadData();
+            _FillPersonInfo();
         }
 
+
+        private void _LoadPersonImage()
+        {
+            if (_Person.Gendor == 0)
+                pbPersonImage.Image = Resources.Male_512;
+            else
+                pbPersonImage.Image = Resources.Female_512;
+
+
+            string ImagePath = _Person.ImagePath;
+
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    pbPersonImage.ImageLocation = ImagePath;
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+      
         private void lnkEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
            
-            Form frm = new frmAddEditPersonInfo(PersonID);
+            Form frm = new frmAddEditPersonInfo(_PersonID);
 
             frm.ShowDialog();
-            _LoadData();
-            
+
+            LoadPersonInfo(_PersonID);            
         }
 
-        private void ptrImage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gbPersonInformation_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }

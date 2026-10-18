@@ -15,42 +15,42 @@ namespace DVLDPresentationLayer
     {
         private clsUsers _User;
         private int _UserID;
-        private int _PersonID;
 
-        public frmChangePassword()
+        public frmChangePassword(int UserID)
         {
+            
             InitializeComponent();
-        }
-
-
-        public frmChangePassword(int UserID, int PersonID)
-        {
-            InitializeComponent();
-
+            
             _UserID = UserID;
-            _PersonID = PersonID;
-            _LoadData();
 
         }
 
-
-        private void _LoadData()
+        private void _ResetDefualtValues()
         {
-            usctrlLoginInformation1.LoadUserInfo(_UserID);
-            usctrlPersonDetails1.LoadPersonInfo(_PersonID);
-
-            _User = clsUsers.FindUserByID(_UserID);
-
+            txtConfirmPassword.Text = "";
+            txtCurrentPassword.Text = "";
+            txtNewPassword.Text = "";
+            txtCurrentPassword.Focus();
         }
 
         private void frmChangePassword_Load(object sender, EventArgs e)
         {
-            if (_UserID <= 0)
+            _ResetDefualtValues();
+
+            _User = clsUsers.FindByUserID(_UserID);
+
+            if (_User == null)
+            {
+                MessageBox.Show("Could not Find User with id = " + _UserID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+
                 return;
 
-            _LoadData();
-        }
+            }
 
+
+            usctrlUserDetails1.LoadUserInfo(_UserID);
+        }
 
         private bool ValidateRequiredFields()
         {
@@ -64,7 +64,7 @@ namespace DVLDPresentationLayer
 
             else if (txtCurrentPassword.Text != _User.Password)
             {
-                erpMessage.SetError(txtCurrentPassword, "Does not match Current Password");
+                erpMessage.SetError(txtCurrentPassword, "Current password is wrong!");
                 IsValid = false;
             }
 
@@ -93,7 +93,7 @@ namespace DVLDPresentationLayer
 
             else if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
-                erpMessage.SetError(txtConfirmPassword, "Passwords do not match.");
+                erpMessage.SetError(txtConfirmPassword, "Password Confirmation does not match New Password!");
                 IsValid = false;
             }
 
@@ -104,8 +104,7 @@ namespace DVLDPresentationLayer
 
             return IsValid;
         }
-
-
+    
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -116,28 +115,21 @@ namespace DVLDPresentationLayer
 
             if (!ValidateRequiredFields())
             {
-                MessageBox.Show("There is a Filed is not inputed, Please fill it.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            _User.Password = txtNewPassword.Text;
 
-            if (_User == null)
+            if (_User.Save())
             {
-                MessageBox.Show("This form will be closed because no User with " + _UserID);
-                this.Close();
-
-                return;
+                MessageBox.Show("Password Changed Successfully.", "Saved.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _ResetDefualtValues();
             }
-
-
-            _User.Password = txtConfirmPassword.Text;
-
-            if(_User.Save())
-                MessageBox.Show("Data save successfully.");
-
             else
-                MessageBox.Show("Error : Data is not saved succcessfully.");
+            {
+                MessageBox.Show("An Erro Occured, Password did not change.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -148,7 +140,7 @@ namespace DVLDPresentationLayer
 
             else if (txtCurrentPassword.Text != _User.Password)
             {
-                erpMessage.SetError(txtCurrentPassword, "Does not match Current Password");
+                erpMessage.SetError(txtCurrentPassword, "Current password is wrong!");
             }
 
             else
@@ -171,11 +163,12 @@ namespace DVLDPresentationLayer
 
             else if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
-                erpMessage.SetError(txtConfirmPassword, "Passwords do not match.");
+                erpMessage.SetError(txtConfirmPassword, "Password Confirmation does not match New Password!");
             }
 
             else
                 erpMessage.SetError(txtConfirmPassword, "");
         }
+
     }
 }

@@ -48,24 +48,24 @@
             this.lblID = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.gbPersonInformation = new System.Windows.Forms.GroupBox();
-            this.ptrImage = new System.Windows.Forms.PictureBox();
+            this.pbPersonImage = new System.Windows.Forms.PictureBox();
             this.ptrCountry = new System.Windows.Forms.PictureBox();
             this.ptrPhone = new System.Windows.Forms.PictureBox();
             this.ptrDateOfBirth = new System.Windows.Forms.PictureBox();
             this.ptrAddress = new System.Windows.Forms.PictureBox();
             this.ptrEmail = new System.Windows.Forms.PictureBox();
-            this.ptrMan = new System.Windows.Forms.PictureBox();
+            this.pbGendor = new System.Windows.Forms.PictureBox();
             this.ptrName = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ptrNationalNo = new System.Windows.Forms.PictureBox();
             this.gbPersonInformation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrCountry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrPhone)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrDateOfBirth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrEmail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrMan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGendor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrNationalNo)).BeginInit();
@@ -74,6 +74,7 @@
             // lnkEditPersonInfo
             // 
             this.lnkEditPersonInfo.AutoSize = true;
+            this.lnkEditPersonInfo.Enabled = false;
             this.lnkEditPersonInfo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lnkEditPersonInfo.Location = new System.Drawing.Point(695, 38);
             this.lnkEditPersonInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -260,13 +261,13 @@
             // gbPersonInformation
             // 
             this.gbPersonInformation.Controls.Add(this.lnkEditPersonInfo);
-            this.gbPersonInformation.Controls.Add(this.ptrImage);
+            this.gbPersonInformation.Controls.Add(this.pbPersonImage);
             this.gbPersonInformation.Controls.Add(this.ptrCountry);
             this.gbPersonInformation.Controls.Add(this.ptrPhone);
             this.gbPersonInformation.Controls.Add(this.ptrDateOfBirth);
             this.gbPersonInformation.Controls.Add(this.ptrAddress);
             this.gbPersonInformation.Controls.Add(this.ptrEmail);
-            this.gbPersonInformation.Controls.Add(this.ptrMan);
+            this.gbPersonInformation.Controls.Add(this.pbGendor);
             this.gbPersonInformation.Controls.Add(this.ptrName);
             this.gbPersonInformation.Controls.Add(this.pictureBox1);
             this.gbPersonInformation.Controls.Add(this.ptrNationalNo);
@@ -294,18 +295,16 @@
             this.gbPersonInformation.TabIndex = 39;
             this.gbPersonInformation.TabStop = false;
             this.gbPersonInformation.Text = "Person Information";
-            this.gbPersonInformation.Enter += new System.EventHandler(this.gbPersonInformation_Enter);
             // 
-            // ptrImage
+            // pbPersonImage
             // 
-            this.ptrImage.Location = new System.Drawing.Point(691, 88);
-            this.ptrImage.Margin = new System.Windows.Forms.Padding(4);
-            this.ptrImage.Name = "ptrImage";
-            this.ptrImage.Size = new System.Drawing.Size(170, 161);
-            this.ptrImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptrImage.TabIndex = 27;
-            this.ptrImage.TabStop = false;
-            this.ptrImage.Click += new System.EventHandler(this.ptrImage_Click);
+            this.pbPersonImage.Location = new System.Drawing.Point(691, 88);
+            this.pbPersonImage.Margin = new System.Windows.Forms.Padding(4);
+            this.pbPersonImage.Name = "pbPersonImage";
+            this.pbPersonImage.Size = new System.Drawing.Size(170, 161);
+            this.pbPersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbPersonImage.TabIndex = 27;
+            this.pbPersonImage.TabStop = false;
             // 
             // ptrCountry
             // 
@@ -362,16 +361,16 @@
             this.ptrEmail.TabIndex = 22;
             this.ptrEmail.TabStop = false;
             // 
-            // ptrMan
+            // pbGendor
             // 
-            this.ptrMan.Image = global::DVLDPresentationLayer.Properties.Resources.Man_32;
-            this.ptrMan.Location = new System.Drawing.Point(114, 149);
-            this.ptrMan.Margin = new System.Windows.Forms.Padding(4);
-            this.ptrMan.Name = "ptrMan";
-            this.ptrMan.Size = new System.Drawing.Size(22, 23);
-            this.ptrMan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptrMan.TabIndex = 21;
-            this.ptrMan.TabStop = false;
+            this.pbGendor.Image = global::DVLDPresentationLayer.Properties.Resources.Man_32;
+            this.pbGendor.Location = new System.Drawing.Point(114, 149);
+            this.pbGendor.Margin = new System.Windows.Forms.Padding(4);
+            this.pbGendor.Name = "pbGendor";
+            this.pbGendor.Size = new System.Drawing.Size(22, 23);
+            this.pbGendor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbGendor.TabIndex = 21;
+            this.pbGendor.TabStop = false;
             // 
             // ptrName
             // 
@@ -414,16 +413,15 @@
             this.Controls.Add(this.gbPersonInformation);
             this.Name = "usctrlPersonDetails";
             this.Size = new System.Drawing.Size(899, 320);
-            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.gbPersonInformation.ResumeLayout(false);
             this.gbPersonInformation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrCountry)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrPhone)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrDateOfBirth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrEmail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptrMan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGendor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrNationalNo)).EndInit();
@@ -433,13 +431,13 @@
 
         #endregion
         private System.Windows.Forms.LinkLabel lnkEditPersonInfo;
-        private System.Windows.Forms.PictureBox ptrImage;
+        private System.Windows.Forms.PictureBox pbPersonImage;
         private System.Windows.Forms.PictureBox ptrCountry;
         private System.Windows.Forms.PictureBox ptrPhone;
         private System.Windows.Forms.PictureBox ptrDateOfBirth;
         private System.Windows.Forms.PictureBox ptrAddress;
         private System.Windows.Forms.PictureBox ptrEmail;
-        private System.Windows.Forms.PictureBox ptrMan;
+        private System.Windows.Forms.PictureBox pbGendor;
         private System.Windows.Forms.PictureBox ptrName;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox ptrNationalNo;

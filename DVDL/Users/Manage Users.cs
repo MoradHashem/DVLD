@@ -14,42 +14,40 @@ namespace DVLDPresentationLayer
     public partial class frmManageUsers : Form
     {
 
-        private DataTable _Users;
+        private static DataTable _dtAllUsers;
 
         public frmManageUsers()
         {
             InitializeComponent();
-            _RefrashUsersList();
         }
-
-        
-        private void _RefrashUsersList()
-        {
-            _Users = clsUsers.ListUsers();
-
-            dgvListUsers.DataSource = _Users;
-
-            dgvListUsers.Columns.Remove("Is Active");
-
-            DataGridViewCheckBoxColumn chkIsActive = new DataGridViewCheckBoxColumn();
-            chkIsActive.Name = "Is Active";
-            chkIsActive.HeaderText = "Is Active";
-            chkIsActive.DataPropertyName = "Is Active";
-
-            dgvListUsers.Columns.Add(chkIsActive);
-
-            lblCount.Text = dgvListUsers.RowCount.ToString();
-            dgvListUsers.Columns["Full Name"].Width = 250;
-        }
-
 
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
-            _RefrashUsersList();
+            _dtAllUsers = clsUsers.ListUsers();
 
-            txtFilter.Visible = false;
-            cmbFilterIsActive.Visible = false;
-            combFilterBy.SelectedItem = "None";
+            dgvListUsers.DataSource = _dtAllUsers;
+            cbFilterBy.SelectedIndex = 0;
+            lblCount.Text = dgvListUsers.Rows.Count.ToString();
+
+            if (_dtAllUsers.Rows.Count > 0)
+            {
+                dgvListUsers.Columns[0].HeaderText = "User ID";
+                dgvListUsers.Columns[0].Width = 80;
+
+                dgvListUsers.Columns[1].HeaderText = "Person ID";
+                dgvListUsers.Columns[1].Width = 100;
+
+                dgvListUsers.Columns[2].HeaderText = "Full Name";
+                dgvListUsers.Columns[2].Width = 280;
+
+                dgvListUsers.Columns[3].HeaderText = "UserName";
+                dgvListUsers.Columns[3].Width = 100;
+
+                dgvListUsers.Columns[4].HeaderText = "Is Active";
+                dgvListUsers.Columns[4].Width = 91;
+            }
+
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -57,105 +55,90 @@ namespace DVLDPresentationLayer
             this.Close();
         }
 
-        private void combFilterBy_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (combFilterBy.Text == "None")
+            if (cbFilterBy.Text == "Is Active")
             {
                 txtFilter.Visible = false;
-                cmbFilterIsActive.Visible = false;
-                _RefrashUsersList();
-            }
-            else if (combFilterBy.Text == "Is Active")
-            {
-                cmbFilterIsActive.Visible = true;
-                cmbFilterIsActive.SelectedIndex = 0;
-                txtFilter.Visible = false;
-                cmbFilterIsActive.Focus();
+                cbFilterIsActive.Visible = true;
+                cbFilterIsActive.SelectedIndex = 0;
+                cbFilterIsActive.Focus();
             }
             else
             {
-                cmbFilterIsActive.Visible = false;
-                txtFilter.Visible = true;
+                txtFilter.Visible = (cbFilterBy.Text != "None");
+                cbFilterIsActive.Visible = false;
+
+                txtFilter.Text = "";
                 txtFilter.Focus();
             }
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            string FilterValue = txtFilter.Text.Trim();
+            string FilterColumn = "";
 
-            if (_Users == null)
-                return;
-
-            DataView dvUsers = _Users.DefaultView;
-
-
-            switch (combFilterBy.Text)
+            switch (cbFilterBy.Text)
             {
-                case "Person ID":
-
-                    if (int.TryParse(FilterValue, out int PersonID))
-                        dvUsers.RowFilter = $"[Person ID] = {PersonID}";
-
+                case "User ID":
+                    FilterColumn = "UserID";
+                    break;
+                case "UserName":
+                    FilterColumn = "UserName";
                     break;
 
-                case "User ID":
-
-                    if (int.TryParse(FilterValue, out int UserID))
-                        dvUsers.RowFilter = $"[User ID] = {UserID}";
-
+                case "Person ID":
+                    FilterColumn = "PersonID";
                     break;
 
                 case "Full Name":
-
-                    dvUsers.RowFilter = $"[Full Name] LIKE '{FilterValue}%'";
-
+                    FilterColumn = "FullName";
                     break;
 
-                case "User Name":
-
-                    dvUsers.RowFilter = $"[User Name] LIKE '{FilterValue}%'";
-
-                    break;
-                
                 default:
-
-                    dvUsers.RowFilter = "";
-
+                    FilterColumn = "None";
                     break;
             }
 
-            dgvListUsers.DataSource = dvUsers;
 
-            lblCount.Text = dgvListUsers.RowCount.ToString();
+            if (txtFilter.Text.Trim() == "" || FilterColumn == "None")
+            {
+                _dtAllUsers.DefaultView.RowFilter = "";
+                lblCount.Text = dgvListUsers.Rows.Count.ToString();
+                return;
+            }
+
+            if (FilterColumn != "FullName" && FilterColumn != "UserName")
+                _dtAllUsers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilter.Text.Trim());
+            else
+                _dtAllUsers.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilter.Text.Trim());
+
+
+            lblCount.Text = _dtAllUsers.Rows.Count.ToString();
+
         }
 
-        private void cmbFilterIsActive_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbFilterIsActive_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_Users == null)
-                return;
+            string FilterColumn = "IsActive";
+            string FilterValue = cbFilterIsActive.Text;
 
-            DataView dvUsers = _Users.DefaultView;
-
-            switch (cmbFilterIsActive.Text)
+            switch (FilterValue)
             {
                 case "All":
-
-                    dvUsers.RowFilter = "";
                     break;
-
                 case "Yes":
-
-                    dvUsers.RowFilter = "[Is Active] = true";
+                    FilterValue = "1";
                     break;
-
                 case "No":
-
-                    dvUsers.RowFilter = "[Is Active] = false";
+                    FilterValue = "0";
                     break;
             }
 
-            dgvListUsers.DataSource = dvUsers;
+            if (FilterValue == "All")
+                _dtAllUsers.DefaultView.RowFilter = "";
+            else
+                _dtAllUsers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, FilterValue);
 
             lblCount.Text = dgvListUsers.RowCount.ToString();
         }
@@ -165,7 +148,7 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditNewUser();
 
             frm.ShowDialog();
-            _RefrashUsersList();
+            frmManageUsers_Load(null, null);
         }
 
         private void tsmiAddNewPerson_Click(object sender, EventArgs e)
@@ -173,48 +156,81 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditNewUser();
 
             frm.ShowDialog();
-            _RefrashUsersList();
+            frmManageUsers_Load(null, null);
+
         }
 
         private void tsmiDelete_Click(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["UserID"].Value);
 
             if (MessageBox.Show($"Are you sure you want to delete user [ {UserID} ]", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (clsUsers.DeleteUser(UserID))
-                    MessageBox.Show("User Deleted Successfully.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    MessageBox.Show("User has been deleted successfully", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    frmManageUsers_Load(null, null);
+                }
+
+                else
+                    MessageBox.Show("User is not delted due to data connected to it.", "Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
 
-            _RefrashUsersList();
+
         }
 
         private void tsmiEdit_Click(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
+            int UserID = (int)dgvListUsers.CurrentRow.Cells["UserID"].Value;
 
             frmAddEditNewUser frm = new frmAddEditNewUser(UserID);
 
             frm.ShowDialog();
-            _RefrashUsersList();
+            frmManageUsers_Load(null, null);
+
         }
 
         private void tsmiShowDetails_Click(object sender, EventArgs e)  
         {
-            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
-            int PersonID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["Person ID"].Value);
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["UserID"].Value);
 
-            frmUserInformation frm = new frmUserInformation(UserID, PersonID);
+            frmUserInformation frm = new frmUserInformation(UserID);
 
             frm.ShowDialog();
         }
 
         private void tsmiChangePassword_Click(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["User ID"].Value);
-            int PersonID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["Person ID"].Value);
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["UserID"].Value);
 
-            frmChangePassword frm = new frmChangePassword(UserID, PersonID);
+            frmChangePassword frm = new frmChangePassword(UserID);
+
+            frm.ShowDialog();
+        }
+
+        private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbFilterBy.Text == "Person ID" || cbFilterBy.Text == "User ID")
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void tsmiPhoneCall_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void tsmiSendEmail_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void dgvListUsers_DoubleClick(object sender, EventArgs e)
+        {
+
+            int UserID = Convert.ToInt32(dgvListUsers.CurrentRow.Cells["UserID"].Value);
+
+            frmUserInformation frm = new frmUserInformation(UserID);
 
             frm.ShowDialog();
         }

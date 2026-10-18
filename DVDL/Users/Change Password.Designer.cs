@@ -40,9 +40,8 @@
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.usctrlPersonDetails1 = new DVLDPresentationLayer.usctrlPersonDetails();
-            this.usctrlLoginInformation1 = new DVLDPresentationLayer.usctrlLoginInformation();
             this.erpMessage = new System.Windows.Forms.ErrorProvider(this.components);
+            this.usctrlUserDetails1 = new DVLDPresentationLayer.usctrlUserDetails();
             ((System.ComponentModel.ISupportInitialize)(this.ptrCurrentPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrNewPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptrConfirmPassword)).BeginInit();
@@ -53,7 +52,7 @@
             // 
             this.lblCurrentPassword.AutoSize = true;
             this.lblCurrentPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentPassword.Location = new System.Drawing.Point(38, 469);
+            this.lblCurrentPassword.Location = new System.Drawing.Point(38, 444);
             this.lblCurrentPassword.Name = "lblCurrentPassword";
             this.lblCurrentPassword.Size = new System.Drawing.Size(151, 18);
             this.lblCurrentPassword.TabIndex = 11;
@@ -62,7 +61,7 @@
             // ptrCurrentPassword
             // 
             this.ptrCurrentPassword.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.ptrCurrentPassword.Location = new System.Drawing.Point(215, 469);
+            this.ptrCurrentPassword.Location = new System.Drawing.Point(215, 444);
             this.ptrCurrentPassword.Margin = new System.Windows.Forms.Padding(4);
             this.ptrCurrentPassword.Name = "ptrCurrentPassword";
             this.ptrCurrentPassword.Size = new System.Drawing.Size(22, 23);
@@ -72,7 +71,7 @@
             // 
             // txtCurrentPassword
             // 
-            this.txtCurrentPassword.Location = new System.Drawing.Point(253, 469);
+            this.txtCurrentPassword.Location = new System.Drawing.Point(253, 444);
             this.txtCurrentPassword.Name = "txtCurrentPassword";
             this.txtCurrentPassword.Size = new System.Drawing.Size(171, 24);
             this.txtCurrentPassword.TabIndex = 21;
@@ -80,16 +79,17 @@
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Location = new System.Drawing.Point(253, 511);
+            this.txtNewPassword.Location = new System.Drawing.Point(253, 490);
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(171, 24);
             this.txtNewPassword.TabIndex = 24;
+            this.txtNewPassword.UseSystemPasswordChar = true;
             this.txtNewPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtNewPassword_Validating);
             // 
             // ptrNewPassword
             // 
             this.ptrNewPassword.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.ptrNewPassword.Location = new System.Drawing.Point(215, 511);
+            this.ptrNewPassword.Location = new System.Drawing.Point(215, 491);
             this.ptrNewPassword.Margin = new System.Windows.Forms.Padding(4);
             this.ptrNewPassword.Name = "ptrNewPassword";
             this.ptrNewPassword.Size = new System.Drawing.Size(22, 23);
@@ -101,7 +101,7 @@
             // 
             this.lblNewPassword.AutoSize = true;
             this.lblNewPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewPassword.Location = new System.Drawing.Point(61, 516);
+            this.lblNewPassword.Location = new System.Drawing.Point(61, 491);
             this.lblNewPassword.Name = "lblNewPassword";
             this.lblNewPassword.Size = new System.Drawing.Size(128, 18);
             this.lblNewPassword.TabIndex = 22;
@@ -109,16 +109,17 @@
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(253, 556);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(253, 533);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(171, 24);
             this.txtConfirmPassword.TabIndex = 27;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
             this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
             // 
             // ptrConfirmPassword
             // 
             this.ptrConfirmPassword.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.ptrConfirmPassword.Location = new System.Drawing.Point(215, 556);
+            this.ptrConfirmPassword.Location = new System.Drawing.Point(215, 534);
             this.ptrConfirmPassword.Margin = new System.Windows.Forms.Padding(4);
             this.ptrConfirmPassword.Name = "ptrConfirmPassword";
             this.ptrConfirmPassword.Size = new System.Drawing.Size(22, 23);
@@ -130,7 +131,7 @@
             // 
             this.lblConfirmPassword.AutoSize = true;
             this.lblConfirmPassword.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmPassword.Location = new System.Drawing.Point(36, 556);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(36, 534);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(153, 18);
             this.lblConfirmPassword.TabIndex = 25;
@@ -143,7 +144,7 @@
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::DVLDPresentationLayer.Properties.Resources.Save_32;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(745, 669);
+            this.btnSave.Location = new System.Drawing.Point(744, 583);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(149, 36);
@@ -159,7 +160,7 @@
             this.btnClose.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::DVLDPresentationLayer.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(588, 669);
+            this.btnClose.Location = new System.Drawing.Point(587, 583);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(149, 36);
@@ -168,32 +169,25 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // usctrlPersonDetails1
-            // 
-            this.usctrlPersonDetails1.BackColor = System.Drawing.Color.White;
-            this.usctrlPersonDetails1.Location = new System.Drawing.Point(12, 12);
-            this.usctrlPersonDetails1.Name = "usctrlPersonDetails1";
-            this.usctrlPersonDetails1.Size = new System.Drawing.Size(899, 320);
-            this.usctrlPersonDetails1.TabIndex = 3;
-            // 
-            // usctrlLoginInformation1
-            // 
-            this.usctrlLoginInformation1.BackColor = System.Drawing.Color.White;
-            this.usctrlLoginInformation1.Location = new System.Drawing.Point(20, 325);
-            this.usctrlLoginInformation1.Name = "usctrlLoginInformation1";
-            this.usctrlLoginInformation1.Size = new System.Drawing.Size(891, 92);
-            this.usctrlLoginInformation1.TabIndex = 2;
-            // 
             // erpMessage
             // 
             this.erpMessage.ContainerControl = this;
+            // 
+            // usctrlUserDetails1
+            // 
+            this.usctrlUserDetails1.BackColor = System.Drawing.Color.White;
+            this.usctrlUserDetails1.Location = new System.Drawing.Point(17, -2);
+            this.usctrlUserDetails1.Name = "usctrlUserDetails1";
+            this.usctrlUserDetails1.Size = new System.Drawing.Size(891, 410);
+            this.usctrlUserDetails1.TabIndex = 44;
             // 
             // frmChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(925, 732);
+            this.ClientSize = new System.Drawing.Size(925, 641);
+            this.Controls.Add(this.usctrlUserDetails1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtConfirmPassword);
@@ -205,8 +199,6 @@
             this.Controls.Add(this.txtCurrentPassword);
             this.Controls.Add(this.ptrCurrentPassword);
             this.Controls.Add(this.lblCurrentPassword);
-            this.Controls.Add(this.usctrlPersonDetails1);
-            this.Controls.Add(this.usctrlLoginInformation1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmChangePassword";
@@ -223,9 +215,6 @@
         }
 
         #endregion
-
-        private usctrlPersonDetails usctrlPersonDetails1;
-        private usctrlLoginInformation usctrlLoginInformation1;
         private System.Windows.Forms.Label lblCurrentPassword;
         private System.Windows.Forms.PictureBox ptrCurrentPassword;
         private System.Windows.Forms.TextBox txtCurrentPassword;
@@ -238,5 +227,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ErrorProvider erpMessage;
+        private usctrlUserDetails usctrlUserDetails1;
     }
 }

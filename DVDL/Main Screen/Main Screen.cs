@@ -11,19 +11,16 @@ using DVLDBusinessLayer;
 
 namespace DVLDPresentationLayer
 {
-    public partial class MainScreen : Form
+    public partial class frmMainScreen : Form
     {
-        private clsUsers _User;
+        private frmLoginScreen _frmLoginScreen;
 
 
-        public MainScreen()
+        public frmMainScreen(frmLoginScreen frm)
         {
             InitializeComponent();
-        }
 
-        private void frmMainScreen_Load(object sender, EventArgs e)
-        {
-
+            _frmLoginScreen = frm;
         }
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,29 +39,29 @@ namespace DVLDPresentationLayer
 
         private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _User = clsLoginInformation.GetUser();
-
-            frmUserInformation frm = new frmUserInformation(_User.UserID, _User.PersonID);
+            frmUserInformation frm = new frmUserInformation(clsGlobal.CurrentUser.UserID);
 
             frm.ShowDialog();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _User = clsLoginInformation.GetUser();
-
-            frmChangePassword frm = new frmChangePassword(_User.UserID, _User.PersonID);
+            frmChangePassword frm = new frmChangePassword(clsGlobal.CurrentUser.UserID);
 
             frm.ShowDialog();
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            clsGlobal.CurrentUser = null;
+            _frmLoginScreen.Show();
 
-            frmLoginScreen frm = new frmLoginScreen();
-            frm.ShowDialog();
+            this.Close();
+        }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            _frmLoginScreen.Close();
             this.Close();
         }
     }

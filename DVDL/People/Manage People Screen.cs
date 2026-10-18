@@ -13,32 +13,31 @@ namespace DVLDPresentationLayer
 {
     public partial class frmManagePeople : Form
     {
+        private static DataTable _dtAllPeople = clsPeople.ListPeople();
 
-        private DataTable _dtPeople;
-
+        private DataTable _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                       "FirstName", "SecondName", "ThirdName", "LastName",
+                                                       "GendorCaption", "DateOfBirth", "CountryName",
+                                                       "Phone", "Email");
 
         public frmManagePeople()
         {
             InitializeComponent();
 
-            _RefrashPeopleList();
         }
 
 
-        private void _RefrashPeopleList()
+        private void _RefreshPeopleList()
         {
-            _dtPeople = clsPeople.ListPeople();
+            _dtAllPeople = clsPeople.ListPeople();
+            _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                       "FirstName", "SecondName", "ThirdName", "LastName",
+                                                       "GendorCaption", "DateOfBirth", "CountryName",
+                                                       "Phone", "Email");
 
             dgvListPeople.DataSource = _dtPeople;
-            dgvListPeople.Columns["NationalityCountryID"].HeaderText = "Nationality";
 
             lblCount.Text = dgvListPeople.RowCount.ToString();
-        }
-
-
-        private void dgvListPeople_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
@@ -46,15 +45,56 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditPersonInfo();
             
             frm.ShowDialog();
-            _RefrashPeopleList();
+            _RefreshPeopleList();
         }
 
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
-            _RefrashPeopleList();
-
+            dgvListPeople.DataSource = _dtPeople;
+            cbFilterBy.SelectedIndex = 0;
+            lblCount.Text = dgvListPeople.Rows.Count.ToString();
             txtFilter.Visible = false;
-            combFilterBy.SelectedItem = "None";
+
+            if(dgvListPeople.Rows.Count > 0)
+            {
+
+                dgvListPeople.Columns[0].HeaderText = "Person ID";
+                dgvListPeople.Columns[0].Width = 80;
+                   
+                dgvListPeople.Columns[1].HeaderText = "National No.";
+                dgvListPeople.Columns[1].Width = 120;
+                   
+                   
+                dgvListPeople.Columns[2].HeaderText = "First Name";
+                dgvListPeople.Columns[2].Width = 100;
+                   
+                dgvListPeople.Columns[3].HeaderText = "Second Name";
+                dgvListPeople.Columns[3].Width = 100;
+                   
+                   
+                dgvListPeople.Columns[4].HeaderText = "Third Name";
+                dgvListPeople.Columns[4].Width = 100;
+                   
+                dgvListPeople.Columns[5].HeaderText = "Last Name";
+                dgvListPeople.Columns[5].Width = 100;
+                   
+                dgvListPeople.Columns[6].HeaderText = "Gendor";
+                dgvListPeople.Columns[6].Width = 50;
+                   
+                dgvListPeople.Columns[7].HeaderText = "Date Of Birth";
+                dgvListPeople.Columns[7].Width = 140;
+                   
+                dgvListPeople.Columns[8].HeaderText = "Nationality";
+                dgvListPeople.Columns[8].Width = 90;
+                   
+                   
+                dgvListPeople.Columns[9].HeaderText = "Phone";
+                dgvListPeople.Columns[9].Width = 90;
+                   
+                   
+                dgvListPeople.Columns[10].HeaderText = "Email";
+                dgvListPeople.Columns[10].Width = 140;
+            }
             
         }
 
@@ -63,237 +103,126 @@ namespace DVLDPresentationLayer
             this.Close();
         }
 
-        private void combFilterBy_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (combFilterBy.SelectedIndex == 0)
+            txtFilter.Visible = (txtFilter.Text != "None");
+
+            if (txtFilter.Visible)
             {
-                txtFilter.Visible = false;
-                _RefrashPeopleList();
-            }
-            else
-            {
-                txtFilter.Visible = true;
+                txtFilter.Text = "";
                 txtFilter.Focus();
             }
+
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
+            
+            string FilterColumn = "";
 
-            //    string FilterValue = txtFilter.Text.Trim();
-
-            //    switch (combFilterBy.Text)
-            //    {
-
-            //        case "PersonID":
-
-            //            if (int.TryParse(FilterValue, out int PersonID))
-            //            {
-            //                dgvListPeople.DataSource = clsPeople.FindPeopleByPersonID(PersonID);
-            //            }
-
-            //            break;
-
-
-            //        case "NationalNo":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByNationalNo(FilterValue);
-
-            //            break;
-
-
-            //        case "First Name":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByFirstName(FilterValue);
-
-            //            break;
-
-
-            //        case "Second Name":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleBySecondName(FilterValue);
-
-            //            break;
-
-
-            //        case "Third Name":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByThirdName(FilterValue);
-
-            //            break;
-
-
-            //        case "Last Name":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByLastName(FilterValue);
-
-            //            break;
-
-
-            //        case "Nationality":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByNationality(clsCountry.FindCountryByCountryName(FilterValue).CountryID);
-
-
-            //            break;
-
-
-            //        case "Gendor":
-
-            //            if (FilterValue.Equals("Male", StringComparison.OrdinalIgnoreCase))
-            //            {
-            //                dgvListPeople.DataSource = clsPeople.FindPeopleByGendor(0);
-            //            }
-            //            else if (FilterValue.Equals("Female", StringComparison.OrdinalIgnoreCase))
-            //            {
-            //                dgvListPeople.DataSource = clsPeople.FindPeopleByGendor(1);
-            //            }
-            //            else
-            //            {
-            //                dgvListPeople.DataSource = null;
-            //            }
-
-            //            break;
-
-
-            //        case "Phone":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByPhone(FilterValue);
-
-            //            break;
-
-
-            //        case "Email":
-
-            //            dgvListPeople.DataSource = clsPeople.FindPeopleByEmail(FilterValue);
-
-            //            break;
-
-            //        default :
-
-            //            dgvListPeople.DataSource = null;
-
-            //            break;
-            //    }
-
-            //    lblCount.Text = dgvListPeople.RowCount.ToString();
-
-
-            string FilterValue = txtFilter.Text.Trim();
-
-            if (_dtPeople == null)
-                return;
-
-            DataView dvPeople = _dtPeople.DefaultView;
-
-            switch (combFilterBy.Text)
+            switch (cbFilterBy.Text)
             {
-                case "PersonID":
-
-                    if (int.TryParse(FilterValue, out int PersonID))
-                        dvPeople.RowFilter = $"PersonID = {PersonID}";
-
+                case "Person ID":
+                    FilterColumn = "PersonID";
                     break;
 
-                case "NationalNo":
-
-                    dvPeople.RowFilter = $"NationalNo LIKE '{FilterValue}%'";
-
+                case "National No":
+                    FilterColumn = "NationalNo";
                     break;
 
                 case "First Name":
-
-                    dvPeople.RowFilter = $"FirstName LIKE '{FilterValue}%'";
-
+                    FilterColumn = "FirstName";
                     break;
 
                 case "Second Name":
-
-                    dvPeople.RowFilter = $"SecondName LIKE '{FilterValue}%'";
-
+                    FilterColumn = "SecondName";
                     break;
 
                 case "Third Name":
-
-                    dvPeople.RowFilter = $"ThirdName LIKE '{FilterValue}%'";
-
+                    FilterColumn = "ThirdName";
                     break;
 
                 case "Last Name":
-
-                    dvPeople.RowFilter = $"LastName LIKE '{FilterValue}%'";
-
+                    FilterColumn = "LastName";
                     break;
 
                 case "Nationality":
-
-                    dvPeople.RowFilter = $"NationalityCountryID  LIKE '{FilterValue}%'";
-
+                    FilterColumn = "CountryName";
                     break;
 
                 case "Gendor":
-
-                    dvPeople.RowFilter = $"Gendor LIKE '{FilterValue}%'";
-
+                    FilterColumn = "GendorCaption";
                     break;
 
                 case "Phone":
-
-                    dvPeople.RowFilter = $"Phone LIKE '{FilterValue}%'";
-
+                    FilterColumn = "Phone";
                     break;
 
                 case "Email":
-
-                    dvPeople.RowFilter = $"Email LIKE '{FilterValue}%'";
-
+                    FilterColumn = "Email";
                     break;
 
                 default:
-
-                    dvPeople.RowFilter = "";
-
+                    FilterColumn = "None";
                     break;
             }
 
-            dgvListPeople.DataSource = dvPeople;
 
-            lblCount.Text = dgvListPeople.RowCount.ToString();
+            if (txtFilter.Text.Trim() == "" || FilterColumn == "None")
+            {
+                _dtPeople.DefaultView.RowFilter = "";
+                lblCount.Text = _dtPeople.Rows.Count.ToString();
+                return;
+            }
+
+            if (FilterColumn == "PersonID")
+                _dtPeople.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilter.Text.Trim());
+            else
+                _dtPeople.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilter.Text.Trim());
+
+
+            lblCount.Text = _dtPeople.Rows.Count.ToString();
+
+            
 
         }
 
         private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (combFilterBy.SelectedIndex == 1)
+            if (cbFilterBy.Text == "Person ID")
             {
-                if(!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-                {
+                 if(!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
                     e.Handled = true;
-                }
+
             }
         }
 
         private void tsmiEdit_Click(object sender, EventArgs e)
         {
-            int PersonID = Convert.ToInt32(dgvListPeople.CurrentRow.Cells["PersonID"].Value);
+            int PersonID = (int)dgvListPeople.CurrentRow.Cells["PersonID"].Value;
 
             Form frm = new frmAddEditPersonInfo(PersonID);
 
             frm.ShowDialog();
-            _RefrashPeopleList();
+            _RefreshPeopleList();
         }
 
         private void tsmiDelete_Click(object sender, EventArgs e)
         {
-            int PersonID = Convert.ToInt32(dgvListPeople.CurrentRow.Cells["PersonID"].Value);
+            int PersonID = (int)dgvListPeople.CurrentRow.Cells["PersonID"].Value;
 
-            if (MessageBox.Show($"Are you sure you want to delete person [{PersonID}]", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show($"Are you sure you want to delete person [{PersonID}]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 if(clsPeople.DeletePerson(PersonID))
-                    MessageBox.Show("Person Deleted Successfully.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshPeopleList();
+                }
+
+                else
+                    MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            _RefrashPeopleList();
         }
 
         private void tsmiAddNewPerson_Click(object sender, EventArgs e)
@@ -301,22 +230,34 @@ namespace DVLDPresentationLayer
             Form frm = new frmAddEditPersonInfo();
 
             frm.ShowDialog();
-            _RefrashPeopleList();
+            _RefreshPeopleList();
         }
 
         private void tsmiShowDetails_Click(object sender, EventArgs e)
         {
-            int PersonID = Convert.ToInt32(dgvListPeople.CurrentRow.Cells["PersonID"].Value);
+            int PersonID = (int)dgvListPeople.CurrentRow.Cells["PersonID"].Value;
 
             Form frm = new frmPersonDetails(PersonID);
 
             frm.ShowDialog();
-            _RefrashPeopleList();
         }
 
-        private void ptrManagePeopleImage_Click(object sender, EventArgs e)
+        private void tsmiSendEmail_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
+        private void tsmiPhoneCall_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void dgvListPeople_DoubleClick(object sender, EventArgs e)
+        {
+            int PersonID = (int)dgvListPeople.CurrentRow.Cells["PersonID"].Value;
+
+            Form frm = new frmPersonDetails(PersonID);
+            frm.ShowDialog();
         }
     }
 }

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lblManagePeople = new System.Windows.Forms.Label();
             this.lblFilterBy = new System.Windows.Forms.Label();
-            this.combFilterBy = new System.Windows.Forms.ComboBox();
+            this.cbFilterBy = new System.Windows.Forms.ComboBox();
             this.dgvListPeople = new System.Windows.Forms.DataGridView();
             this.cmsManagePeople = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiShowDetails = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,14 +74,14 @@
             this.lblFilterBy.TabIndex = 2;
             this.lblFilterBy.Text = "Filter By :";
             // 
-            // combFilterBy
+            // cbFilterBy
             // 
-            this.combFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combFilterBy.FormattingEnabled = true;
-            this.combFilterBy.Items.AddRange(new object[] {
+            this.cbFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilterBy.FormattingEnabled = true;
+            this.cbFilterBy.Items.AddRange(new object[] {
             "None",
-            "PersonID",
-            "NationalNo",
+            "Person ID",
+            "National No",
             "First Name",
             "Second Name",
             "Third Name",
@@ -90,11 +90,11 @@
             "Gendor",
             "Phone",
             "Email"});
-            this.combFilterBy.Location = new System.Drawing.Point(98, 276);
-            this.combFilterBy.Name = "combFilterBy";
-            this.combFilterBy.Size = new System.Drawing.Size(199, 24);
-            this.combFilterBy.TabIndex = 3;
-            this.combFilterBy.SelectedIndexChanged += new System.EventHandler(this.combFilterBy_SelectedIndexChanged);
+            this.cbFilterBy.Location = new System.Drawing.Point(98, 276);
+            this.cbFilterBy.Name = "cbFilterBy";
+            this.cbFilterBy.Size = new System.Drawing.Size(199, 24);
+            this.cbFilterBy.TabIndex = 3;
+            this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 
             // dgvListPeople
             // 
@@ -112,7 +112,7 @@
             this.dgvListPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListPeople.Size = new System.Drawing.Size(1381, 412);
             this.dgvListPeople.TabIndex = 4;
-            this.dgvListPeople.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListPeople_CellContentClick);
+            this.dgvListPeople.DoubleClick += new System.EventHandler(this.dgvListPeople_DoubleClick);
             // 
             // cmsManagePeople
             // 
@@ -183,6 +183,7 @@
             this.tsmiSendEmail.Name = "tsmiSendEmail";
             this.tsmiSendEmail.Size = new System.Drawing.Size(214, 26);
             this.tsmiSendEmail.Text = "Send Email";
+            this.tsmiSendEmail.Click += new System.EventHandler(this.tsmiSendEmail_Click);
             // 
             // tsmiPhoneCall
             // 
@@ -191,6 +192,7 @@
             this.tsmiPhoneCall.Name = "tsmiPhoneCall";
             this.tsmiPhoneCall.Size = new System.Drawing.Size(214, 26);
             this.tsmiPhoneCall.Text = "Phone Call";
+            this.tsmiPhoneCall.Click += new System.EventHandler(this.tsmiPhoneCall_Click);
             // 
             // lblRecords
             // 
@@ -223,6 +225,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Image = global::DVLDPresentationLayer.Properties.Resources.Close_321;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClose.Location = new System.Drawing.Point(1272, 727);
@@ -252,13 +255,13 @@
             this.ptrManagePeopleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptrManagePeopleImage.TabIndex = 0;
             this.ptrManagePeopleImage.TabStop = false;
-            this.ptrManagePeopleImage.Click += new System.EventHandler(this.ptrManagePeopleImage_Click);
             // 
             // frmManagePeople
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1407, 776);
             this.Controls.Add(this.txtFilter);
             this.Controls.Add(this.lblCount);
@@ -266,7 +269,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddPerson);
             this.Controls.Add(this.dgvListPeople);
-            this.Controls.Add(this.combFilterBy);
+            this.Controls.Add(this.cbFilterBy);
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.lblManagePeople);
             this.Controls.Add(this.ptrManagePeopleImage);
@@ -289,7 +292,7 @@
         private System.Windows.Forms.PictureBox ptrManagePeopleImage;
         private System.Windows.Forms.Label lblManagePeople;
         private System.Windows.Forms.Label lblFilterBy;
-        private System.Windows.Forms.ComboBox combFilterBy;
+        private System.Windows.Forms.ComboBox cbFilterBy;
         private System.Windows.Forms.DataGridView dgvListPeople;
         private System.Windows.Forms.Button btnAddPerson;
         private System.Windows.Forms.Button btnClose;

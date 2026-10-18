@@ -13,15 +13,17 @@ namespace DVLDPresentationLayer
     public partial class frmPersonDetails : Form
     {
 
-
         public frmPersonDetails(int PersonID)
         {
             InitializeComponent();
-            usctrlPersonDetails1.PersonID = PersonID;
+            usctrlPersonDetails1.LoadPersonInfo(PersonID);
+
         }
 
-        private void frmPersonDetails_Load(object sender, EventArgs e)
+        public frmPersonDetails(string NationalNo)
         {
+            InitializeComponent();
+            usctrlPersonDetails1.LoadPersonInfo(NationalNo);
 
         }
 

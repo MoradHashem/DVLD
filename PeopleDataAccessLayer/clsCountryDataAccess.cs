@@ -7,7 +7,7 @@ namespace DVLDDataAccessLayer
     public class clsCountryDataAccess
     {
 
-        public static bool GetCountryInfoByCountryID(int CountryID, ref string CountryName)
+        public static bool GetCountryInfoByID(int CountryID, ref string CountryName)
         {
             bool IsFound = false;
 
@@ -59,13 +59,13 @@ namespace DVLDDataAccessLayer
 
 
 
-        public static bool GetCountryInfoByCountryName(ref int CountryID, string CountryName)
+        public static bool GetCountryInfoByName(ref int CountryID, string CountryName)
         {
             bool IsFound = false;
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM Countries WHERE CountryName LIKE @CountryName + '%'";
+            string Query = "SELECT * FROM Countries WHERE CountryName = @CountryName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 
@@ -118,7 +118,7 @@ namespace DVLDDataAccessLayer
 
             SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM Countries";
+            string Query = "SELECT * FROM Countries order by CountryName";
 
             SqlCommand Command = new SqlCommand(Query, Connection);
 

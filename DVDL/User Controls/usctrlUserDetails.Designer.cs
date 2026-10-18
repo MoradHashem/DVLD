@@ -1,6 +1,6 @@
 ﻿namespace DVLDPresentationLayer
 {
-    partial class usctrlLoginInformation
+    partial class usctrlUserDetails
     {
         /// <summary> 
         /// Required designer variable.
@@ -35,6 +35,7 @@
             this.lblUserName = new System.Windows.Forms.Label();
             this.lblUserIDValue = new System.Windows.Forms.Label();
             this.lblUserID = new System.Windows.Forms.Label();
+            this.usctrlPersonDetails1 = new DVLDPresentationLayer.usctrlPersonDetails();
             this.gbLoginInformation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             this.gbLoginInformation.Controls.Add(this.lblUserName);
             this.gbLoginInformation.Controls.Add(this.lblUserIDValue);
             this.gbLoginInformation.Controls.Add(this.lblUserID);
-            this.gbLoginInformation.Location = new System.Drawing.Point(3, 3);
+            this.gbLoginInformation.Location = new System.Drawing.Point(7, 317);
             this.gbLoginInformation.Name = "gbLoginInformation";
             this.gbLoginInformation.Size = new System.Drawing.Size(876, 81);
             this.gbLoginInformation.TabIndex = 48;
@@ -113,15 +114,23 @@
             this.lblUserID.TabIndex = 40;
             this.lblUserID.Text = "User ID :";
             // 
-            // usctrlLoginInformation
+            // usctrlPersonDetails1
+            // 
+            this.usctrlPersonDetails1.BackColor = System.Drawing.Color.White;
+            this.usctrlPersonDetails1.Location = new System.Drawing.Point(-2, -1);
+            this.usctrlPersonDetails1.Name = "usctrlPersonDetails1";
+            this.usctrlPersonDetails1.Size = new System.Drawing.Size(899, 320);
+            this.usctrlPersonDetails1.TabIndex = 49;
+            // 
+            // usctrlUserDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.usctrlPersonDetails1);
             this.Controls.Add(this.gbLoginInformation);
-            this.Name = "usctrlLoginInformation";
-            this.Size = new System.Drawing.Size(891, 92);
-            this.Load += new System.EventHandler(this.usctrlLoginInformation_Load);
+            this.Name = "usctrlUserDetails";
+            this.Size = new System.Drawing.Size(891, 410);
             this.gbLoginInformation.ResumeLayout(false);
             this.gbLoginInformation.PerformLayout();
             this.ResumeLayout(false);
@@ -137,5 +146,6 @@
         private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label lblUserIDValue;
         private System.Windows.Forms.Label lblUserID;
+        private usctrlPersonDetails usctrlPersonDetails1;
     }
 }

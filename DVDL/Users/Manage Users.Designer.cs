@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lblManageUsers = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.combFilterBy = new System.Windows.Forms.ComboBox();
+            this.cbFilterBy = new System.Windows.Forms.ComboBox();
             this.lblFilterBy = new System.Windows.Forms.Label();
             this.dgvListUsers = new System.Windows.Forms.DataGridView();
             this.cmsManagePeople = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -46,7 +46,7 @@
             this.tsmiPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.lblCount = new System.Windows.Forms.Label();
             this.lblRecords = new System.Windows.Forms.Label();
-            this.cmbFilterIsActive = new System.Windows.Forms.ComboBox();
+            this.cbFilterIsActive = new System.Windows.Forms.ComboBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAddUser = new System.Windows.Forms.Button();
             this.ptrManagePeopleImage = new System.Windows.Forms.PictureBox();
@@ -73,23 +73,24 @@
             this.txtFilter.Size = new System.Drawing.Size(222, 24);
             this.txtFilter.TabIndex = 12;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
+            this.txtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilter_KeyPress);
             // 
-            // combFilterBy
+            // cbFilterBy
             // 
-            this.combFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combFilterBy.FormattingEnabled = true;
-            this.combFilterBy.Items.AddRange(new object[] {
+            this.cbFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilterBy.FormattingEnabled = true;
+            this.cbFilterBy.Items.AddRange(new object[] {
             "None",
             "User ID",
+            "UserName",
             "Person ID",
             "Full Name",
-            "User Name",
             "Is Active"});
-            this.combFilterBy.Location = new System.Drawing.Point(126, 262);
-            this.combFilterBy.Name = "combFilterBy";
-            this.combFilterBy.Size = new System.Drawing.Size(199, 24);
-            this.combFilterBy.TabIndex = 11;
-            this.combFilterBy.SelectedIndexChanged += new System.EventHandler(this.combFilterBy_SelectedIndexChanged);
+            this.cbFilterBy.Location = new System.Drawing.Point(126, 262);
+            this.cbFilterBy.Name = "cbFilterBy";
+            this.cbFilterBy.Size = new System.Drawing.Size(199, 24);
+            this.cbFilterBy.TabIndex = 11;
+            this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 
             // lblFilterBy
             // 
@@ -117,6 +118,7 @@
             this.dgvListUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListUsers.Size = new System.Drawing.Size(821, 412);
             this.dgvListUsers.TabIndex = 13;
+            this.dgvListUsers.DoubleClick += new System.EventHandler(this.dgvListUsers_DoubleClick);
             // 
             // cmsManagePeople
             // 
@@ -133,28 +135,28 @@
             this.tsmiSendEmail,
             this.tsmiPhoneCall});
             this.cmsManagePeople.Name = "cmsManagePeople";
-            this.cmsManagePeople.Size = new System.Drawing.Size(215, 226);
+            this.cmsManagePeople.Size = new System.Drawing.Size(186, 198);
             // 
             // tsmiShowDetails
             // 
             this.tsmiShowDetails.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiShowDetails.Image = global::DVLDPresentationLayer.Properties.Resources.PersonDetails_32;
             this.tsmiShowDetails.Name = "tsmiShowDetails";
-            this.tsmiShowDetails.Size = new System.Drawing.Size(214, 26);
+            this.tsmiShowDetails.Size = new System.Drawing.Size(185, 26);
             this.tsmiShowDetails.Text = "Show Details";
             this.tsmiShowDetails.Click += new System.EventHandler(this.tsmiShowDetails_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
             // 
             // tsmiAddNewPerson
             // 
             this.tsmiAddNewPerson.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiAddNewPerson.Image = global::DVLDPresentationLayer.Properties.Resources.Add_Person_40;
             this.tsmiAddNewPerson.Name = "tsmiAddNewPerson";
-            this.tsmiAddNewPerson.Size = new System.Drawing.Size(214, 26);
+            this.tsmiAddNewPerson.Size = new System.Drawing.Size(185, 26);
             this.tsmiAddNewPerson.Text = "Add New User";
             this.tsmiAddNewPerson.Click += new System.EventHandler(this.tsmiAddNewPerson_Click);
             // 
@@ -163,7 +165,7 @@
             this.tsmiEdit.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiEdit.Image = global::DVLDPresentationLayer.Properties.Resources.edit_32;
             this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(214, 26);
+            this.tsmiEdit.Size = new System.Drawing.Size(185, 26);
             this.tsmiEdit.Text = "Edit";
             this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
             // 
@@ -172,7 +174,7 @@
             this.tsmiDelete.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiDelete.Image = global::DVLDPresentationLayer.Properties.Resources.Delete_32;
             this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(214, 26);
+            this.tsmiDelete.Size = new System.Drawing.Size(185, 26);
             this.tsmiDelete.Text = "Delete";
             this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
             // 
@@ -181,30 +183,32 @@
             this.tsmiChangePassword.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiChangePassword.Image = global::DVLDPresentationLayer.Properties.Resources.Password_32;
             this.tsmiChangePassword.Name = "tsmiChangePassword";
-            this.tsmiChangePassword.Size = new System.Drawing.Size(214, 26);
+            this.tsmiChangePassword.Size = new System.Drawing.Size(185, 26);
             this.tsmiChangePassword.Text = "Change Password";
             this.tsmiChangePassword.Click += new System.EventHandler(this.tsmiChangePassword_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
             // 
             // tsmiSendEmail
             // 
             this.tsmiSendEmail.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiSendEmail.Image = global::DVLDPresentationLayer.Properties.Resources.send_email_32;
             this.tsmiSendEmail.Name = "tsmiSendEmail";
-            this.tsmiSendEmail.Size = new System.Drawing.Size(214, 26);
+            this.tsmiSendEmail.Size = new System.Drawing.Size(185, 26);
             this.tsmiSendEmail.Text = "Send Email";
+            this.tsmiSendEmail.Click += new System.EventHandler(this.tsmiSendEmail_Click);
             // 
             // tsmiPhoneCall
             // 
             this.tsmiPhoneCall.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsmiPhoneCall.Image = global::DVLDPresentationLayer.Properties.Resources.call_32;
             this.tsmiPhoneCall.Name = "tsmiPhoneCall";
-            this.tsmiPhoneCall.Size = new System.Drawing.Size(214, 26);
+            this.tsmiPhoneCall.Size = new System.Drawing.Size(185, 26);
             this.tsmiPhoneCall.Text = "Phone Call";
+            this.tsmiPhoneCall.Click += new System.EventHandler(this.tsmiPhoneCall_Click);
             // 
             // lblCount
             // 
@@ -226,19 +230,19 @@
             this.lblRecords.TabIndex = 16;
             this.lblRecords.Text = "# Records :";
             // 
-            // cmbFilterIsActive
+            // cbFilterIsActive
             // 
-            this.cmbFilterIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFilterIsActive.FormattingEnabled = true;
-            this.cmbFilterIsActive.Items.AddRange(new object[] {
+            this.cbFilterIsActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilterIsActive.FormattingEnabled = true;
+            this.cbFilterIsActive.Items.AddRange(new object[] {
             "All",
             "Yes",
             "No"});
-            this.cmbFilterIsActive.Location = new System.Drawing.Point(334, 262);
-            this.cmbFilterIsActive.Name = "cmbFilterIsActive";
-            this.cmbFilterIsActive.Size = new System.Drawing.Size(142, 24);
-            this.cmbFilterIsActive.TabIndex = 18;
-            this.cmbFilterIsActive.SelectedIndexChanged += new System.EventHandler(this.cmbFilterIsActive_SelectedIndexChanged);
+            this.cbFilterIsActive.Location = new System.Drawing.Point(334, 262);
+            this.cbFilterIsActive.Name = "cbFilterIsActive";
+            this.cbFilterIsActive.Size = new System.Drawing.Size(142, 24);
+            this.cbFilterIsActive.TabIndex = 18;
+            this.cbFilterIsActive.SelectedIndexChanged += new System.EventHandler(this.cbFilterIsActive_SelectedIndexChanged);
             // 
             // btnClose
             // 
@@ -278,14 +282,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(906, 774);
-            this.Controls.Add(this.cmbFilterIsActive);
+            this.Controls.Add(this.cbFilterIsActive);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblRecords);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.dgvListUsers);
             this.Controls.Add(this.txtFilter);
-            this.Controls.Add(this.combFilterBy);
+            this.Controls.Add(this.cbFilterBy);
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.lblManageUsers);
             this.Controls.Add(this.ptrManagePeopleImage);
@@ -308,14 +312,13 @@
         private System.Windows.Forms.PictureBox ptrManagePeopleImage;
         private System.Windows.Forms.Label lblManageUsers;
         private System.Windows.Forms.TextBox txtFilter;
-        private System.Windows.Forms.ComboBox combFilterBy;
+        private System.Windows.Forms.ComboBox cbFilterBy;
         private System.Windows.Forms.Label lblFilterBy;
         private System.Windows.Forms.DataGridView dgvListUsers;
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.Label lblRecords;
-        private System.Windows.Forms.ComboBox cmbFilterIsActive;
         private System.Windows.Forms.ContextMenuStrip cmsManagePeople;
         private System.Windows.Forms.ToolStripMenuItem tsmiShowDetails;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -326,5 +329,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSendEmail;
         private System.Windows.Forms.ToolStripMenuItem tsmiPhoneCall;
         private System.Windows.Forms.ToolStripMenuItem tsmiChangePassword;
+        private System.Windows.Forms.ComboBox cbFilterIsActive;
     }
 }

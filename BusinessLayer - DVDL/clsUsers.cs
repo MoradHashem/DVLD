@@ -21,6 +21,7 @@ namespace DVLDBusinessLayer
         public string UserName { set; get; }
         public string Password { set; get; }
         public bool IsActive { set; get; }
+        public clsPeople PersonInfo;
 
 
         public clsUsers()
@@ -42,6 +43,7 @@ namespace DVLDBusinessLayer
             this.UserName = UserName;
             this.Password = Password;
             this.IsActive = IsActive;
+            this.PersonInfo = clsPeople.Find(PersonID);
 
             Mode = _enMode.Update;
         }
@@ -79,11 +81,10 @@ namespace DVLDBusinessLayer
                     break;
 
                 case _enMode.Update:
-                    {
-                        if (_UpdateUserInfo())
+                    
 
-                            return true;
-                    }
+                    return _UpdateUserInfo();
+
                     break;
 
             }
@@ -102,7 +103,7 @@ namespace DVLDBusinessLayer
         }
 
 
-        public static clsUsers FindUserByID(int UserID)
+        public static clsUsers FindByUserID(int UserID)
         {
             string UserName = "", Password = "";
             bool IsActive = true;
@@ -122,15 +123,34 @@ namespace DVLDBusinessLayer
         }
 
 
-
-        public static clsUsers FindUserByUserName(string UserName)
+        public static clsUsers FindByPersonID(int PersonID)
         {
-            string Password = "";
+            string UserName = "", Password = "";
+            bool IsActive = true;
+            int UserID = -1;
+
+
+            if (clsUserDataAccess.GetUserInfoByPersonID(ref UserID, PersonID, ref UserName, ref Password, ref IsActive))
+
+
+                return new clsUsers(UserID, PersonID, UserName, Password, IsActive);
+
+
+            else
+
+                return null;
+
+        }
+
+
+
+        public static clsUsers FindByPasswordAndUserName(string Password, string UserName)
+        {
             bool IsActive = true;
             int PersonID = -1, UserID = -1;
 
 
-            if (clsUserDataAccess.GetUserInfoByUserName(ref UserID, ref PersonID, UserName, ref Password, ref IsActive))
+            if (clsUserDataAccess.GetUserInfoByPasswordAndUserName(ref UserID, ref PersonID, UserName, Password, ref IsActive))
 
 
                 return new clsUsers(UserID, PersonID, UserName, Password, IsActive);
@@ -148,39 +168,26 @@ namespace DVLDBusinessLayer
         public static DataTable ListUsers()
         {
 
-            DataTable dtUsers = clsUserDataAccess.ListUsers();
-
-            DataTable dtNew = new DataTable();
-
-
-            dtNew.Columns.Add("User ID", typeof(int));
-            dtNew.Columns.Add("Person ID", typeof(int));
-            dtNew.Columns.Add("Full Name");
-            dtNew.Columns.Add("User Name");
-            dtNew.Columns.Add("Is Active");
-
-
-            foreach (DataRow Row in dtUsers.Rows)
-            {
-                DataRow NewRow = dtNew.NewRow();
-
-                NewRow["User ID"] = Row["UserID"];
-                NewRow["Person ID"] = Row["PersonID"];
-                NewRow["Full Name"] = Row["FirstName"] + " " + Row["SecondName"] + " " + Row["ThirdName"] + " " + Row["LastName"];
-                NewRow["User Name"] = Row["UserName"];
-                NewRow["Is Active"] = Row["IsActive"];
-
-
-                dtNew.Rows.Add(NewRow);
-
-            }
-
-
-
-
-
-            return dtNew;
+            return clsUserDataAccess.ListUsers();
         }
+
+
+        public static bool IsUserExist(int UserID)
+        {
+            return clsUserDataAccess.IsUserExist(UserID);
+        }
+
+        public static bool IsUserExist(string UserName)
+        {
+            return clsUserDataAccess.IsUserExist(UserName);
+        }
+
+
+        public static bool IsUserExistForPersonID(int PersonID)
+        {
+            return clsUserDataAccess.IsUserExistForPersonID(PersonID);
+        }
+
 
 
 
