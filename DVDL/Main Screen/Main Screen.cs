@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
+using DVLDPresentationLayer.Test.Test_Types;
 
 namespace DVLDPresentationLayer
 {
@@ -63,6 +64,20 @@ namespace DVLDPresentationLayer
         {
             _frmLoginScreen.Close();
             this.Close();
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes frm = new frmManageApplicationTypes();
+
+            frm.ShowDialog();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frm = new frmManageTestTypes();
+
+            frm.ShowDialog();
         }
     }
 }
