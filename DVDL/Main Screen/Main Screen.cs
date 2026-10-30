@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
 using DVLDPresentationLayer.Test.Test_Types;
+using DVLDPresentationLayer.Applocations.Local_Driving_License;
 
 namespace DVLDPresentationLayer
 {
@@ -78,6 +79,21 @@ namespace DVLDPresentationLayer
             frmManageTestTypes frm = new frmManageTestTypes();
 
             frm.ShowDialog();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmAddEditLocalDrivingLicense();
+
+            frm.ShowDialog();
+        }
+
+        private void localLicenswApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmManageLocalDrivingLicenseApplications();
+
+            frm.ShowDialog();
+            
         }
     }
 }

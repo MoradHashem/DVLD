@@ -8,8 +8,8 @@ namespace DVLDBusinessLayer
     public class clsPeople
     {
 
-        public enum _enMode { AddNew = 0, Update = 1 };
-        public _enMode Mode = _enMode.AddNew;
+        public enum enMode { AddNew = 0, Update = 1 };
+        public enMode Mode = enMode.AddNew;
 
 
 
@@ -58,7 +58,7 @@ namespace DVLDBusinessLayer
             this.Address = "";
             this.ImagePath = "";
 
-            this.Mode = _enMode.AddNew;
+            this.Mode = enMode.AddNew;
         }
 
 
@@ -81,7 +81,7 @@ namespace DVLDBusinessLayer
             this.ImagePath = ImagePath;
             this.CountryInfo = clsCountry.Find(NationalityCountryID);
 
-            Mode = _enMode.Update;
+            Mode = enMode.Update;
         }
 
 
@@ -112,18 +112,18 @@ namespace DVLDBusinessLayer
         {
             switch (this.Mode)
             {
-                case _enMode.AddNew:
+                case enMode.AddNew:
                     {
                         if (_AddNewPerson())
                         {
-                            Mode = _enMode.Update;
+                            Mode = enMode.Update;
 
                             return true;
                         }
                     }
                     break;
 
-                case _enMode.Update:
+                case enMode.Update:
                     {
                         if (_UpdateInfo())
 

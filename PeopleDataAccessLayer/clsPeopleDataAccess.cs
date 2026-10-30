@@ -94,7 +94,7 @@ namespace DVLDDataAccessLayer
             string Query = @"UPDATE People 
                              SET FirstName = @FirstName,
                                  SecondName = @SecondName,
-                                 ThirdName = @ThirdName,
+                                 ThirdName = @ThirdName,ZEDZEDZED
                                  LastName = @LastName,
                                  NationalNo = @NationalNo,
                                  DateOfBirth = @DateOfBirth,
