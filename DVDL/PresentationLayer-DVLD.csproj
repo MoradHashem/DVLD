@@ -74,6 +74,18 @@
     <Compile Include="Applocations\Local Driving License\Manage Local Driving License Applications.Designer.cs">
       <DependentUpon>Manage Local Driving License Applications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\Local Licenses\Show License Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\Show License Info.Designer.cs">
+      <DependentUpon>Show License Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\Issue Driver For The First Time.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\Local Licenses\Issue Driver For The First Time.Designer.cs">
+      <DependentUpon>Issue Driver For The First Time.cs</DependentUpon>
+    </Compile>
     <Compile Include="Test\Take Test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +131,12 @@
     </Compile>
     <Compile Include="Applocations\Application Typees\Manage Application Types.Designer.cs">
       <DependentUpon>Manage Application Types.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\usctrlDriverLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\usctrlDriverLicenseInfo.Designer.cs">
+      <DependentUpon>usctrlDriverLicenseInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="User Controls\usctrlLocalDrivingLicenseApplicationInfo.cs">
       <SubType>UserControl</SubType>
@@ -218,6 +236,12 @@
     <EmbeddedResource Include="Applocations\Local Driving License\Manage Local Driving License Applications.resx">
       <DependentUpon>Manage Local Driving License Applications.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\Issue Driver For The First Time.resx">
+      <DependentUpon>Issue Driver For The First Time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Local Licenses\Show License Info.resx">
+      <DependentUpon>Show License Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Test\List Test Appointments.resx">
       <DependentUpon>List Test Appointments.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applocations\Application Typees\Manage Application Types.resx">
       <DependentUpon>Manage Application Types.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\usctrlDriverLicenseInfo.resx">
+      <DependentUpon>usctrlDriverLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\usctrlLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>usctrlLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
@@ -538,6 +565,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Notes 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IssueDrivingLicense 321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LicenseView 400.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
