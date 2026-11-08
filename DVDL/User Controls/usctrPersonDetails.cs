@@ -65,7 +65,7 @@ namespace DVLDPresentationLayer
             lblPhones.Text = _Person.Phone;
             lblDateOfBirth1.Text = _Person.DateOfBirth.ToShortDateString();
             lblCountries.Text = _Person.CountryInfo.CountryName;
-            lblAddresss.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
+            lblAddresss.Text = _Person.Address;
 
             _LoadPersonImage();
         }

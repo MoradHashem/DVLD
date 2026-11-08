@@ -7,114 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLDBusinessLayer;
 
 namespace DVLDPresentationLayer.Test
 {
     public partial class frmScheduleTest : Form
     {
-        public frmScheduleTest()
+
+        private int _LocalDrivingLicenseApplicationID = -1;
+        private clsTestTypes.enTestType _TestTypeID = clsTestTypes.enTestType.VisionTest;
+        private int _AppointmentID = -1;
+
+
+        public frmScheduleTest(int LocalDrivingLicenseApplicationID, clsTestTypes.enTestType TestTypeID, int AppointmentID = -1)
         {
             InitializeComponent();
+
+            _TestTypeID = TestTypeID;
+            _AppointmentID = AppointmentID;
+            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
         }
 
-        private void ptTitle_Click(object sender, EventArgs e)
+        private void brnClose_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
-        private void lblTitle_Click(object sender, EventArgs e)
+        private void frmScheduleTest_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void lblTrial_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTrialValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNameValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblFeesValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblFees_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClassValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblIDValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ptAppliedForLicense_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClass_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
+            usctrlScheduleTest1.TestTypeID = _TestTypeID;
+            usctrlScheduleTest1.LoadInfo(_LocalDrivingLicenseApplicationID, _AppointmentID);
         }
     }
 }

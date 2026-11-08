@@ -94,7 +94,7 @@ namespace DVLDDataAccessLayer
             string Query = @"UPDATE People 
                              SET FirstName = @FirstName,
                                  SecondName = @SecondName,
-                                 ThirdName = @ThirdName,ZEDZEDZED
+                                 ThirdName = @ThirdName,
                                  LastName = @LastName,
                                  NationalNo = @NationalNo,
                                  DateOfBirth = @DateOfBirth,
@@ -152,6 +152,7 @@ namespace DVLDDataAccessLayer
             catch(Exception ex)
             {
                 //MessageBox.Show(ex.Message);
+                return false;
             }
             finally
             {

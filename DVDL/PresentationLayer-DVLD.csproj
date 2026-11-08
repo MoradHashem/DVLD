@@ -138,6 +138,12 @@
     <Compile Include="Applocations\Application Typees\Manage Application Types.Designer.cs">
       <DependentUpon>Manage Application Types.cs</DependentUpon>
     </Compile>
+    <Compile Include="User Controls\usctrlApplicationBasicInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\usctrlApplicationBasicInfo.Designer.cs">
+      <DependentUpon>usctrlApplicationBasicInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\usctrlDriverLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,11 +192,11 @@
     <Compile Include="Users\User Information.Designer.cs">
       <DependentUpon>User Information.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\Add New User.cs">
+    <Compile Include="Users\Add Edit New User.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Users\Add New User.Designer.cs">
-      <DependentUpon>Add New User.cs</DependentUpon>
+    <Compile Include="Users\Add Edit New User.Designer.cs">
+      <DependentUpon>Add Edit New User.cs</DependentUpon>
     </Compile>
     <Compile Include="User Controls\usctrlPersonDetailsWithFilter.cs">
       <SubType>UserControl</SubType>
@@ -278,6 +284,9 @@
     <EmbeddedResource Include="Applocations\Application Typees\Manage Application Types.resx">
       <DependentUpon>Manage Application Types.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\usctrlApplicationBasicInfo.resx">
+      <DependentUpon>usctrlApplicationBasicInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Controls\usctrlDriverLicenseInfo.resx">
       <DependentUpon>usctrlDriverLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -302,8 +311,8 @@
     <EmbeddedResource Include="Users\User Information.resx">
       <DependentUpon>User Information.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\Add New User.resx">
-      <DependentUpon>Add New User.cs</DependentUpon>
+    <EmbeddedResource Include="Users\Add Edit New User.resx">
+      <DependentUpon>Add Edit New User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\usctrlPersonDetailsWithFilter.resx">
       <DependentUpon>usctrlPersonDetailsWithFilter.cs</DependentUpon>
@@ -595,6 +604,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PersonLicenseHistory 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\driving-test 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Written Test 512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

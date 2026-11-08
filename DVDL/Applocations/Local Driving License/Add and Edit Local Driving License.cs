@@ -131,7 +131,7 @@ namespace DVLDPresentationLayer.Applocations.Local_Driving_License
             
             int LicenseClassID = clsLicenseClass.Find(cbLicenseClass.Text).LicenseClassID;
 
-            int ActiveApplicationID = clsApplications.GetActiveApplicationIDForLicenseClass(_SelectedPersonID, clsApplications.enApplicationType.NewInternationalLicense, LicenseClassID);
+            int ActiveApplicationID = clsApplications.GetActiveApplicationIDForLicenseClass(_SelectedPersonID, clsApplications.enApplicationType.NewDrivingLicense, LicenseClassID);
 
 
             if (ActiveApplicationID != -1)

@@ -248,31 +248,31 @@ namespace DVLDBusinessLayer
             return clsLocalDrivingLicenseApplicationsDataAccess.IsThereAnActiveScheduledTest(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
         }
 
-        //public clsTest GetLastTestPerTestType(clsTestType.enTestType TestTypeID)
-        //{
-        //    return clsTest.FindLastTestPerPersonAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestTypeID);
-        //}
+        public clsTest GetLastTestPerTestType(clsTestTypes.enTestType TestTypeID)
+        {
+            return clsTest.FindLastTestPerPersonAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestTypeID);
+        }
 
-        //public byte GetPassedTestCount()
-        //{
-        //    return clsTest.GetPassedTestCount(this.LocalDrivingLicenseApplicationID);
-        //}
+        public byte GetPassedTestCount()
+        {
+            return clsTest.GetPassedTestCount(this.LocalDrivingLicenseApplicationID);
+        }
 
-        //public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
-        //{
-        //    return clsTest.GetPassedTestCount(LocalDrivingLicenseApplicationID);
-        //}
+        public static byte GetPassedTestCount(int LocalDrivingLicenseApplicationID)
+        {
+            return clsTest.GetPassedTestCount(LocalDrivingLicenseApplicationID);
+        }
 
-        //public bool PassedAllTests()
-        //{
-        //    return clsTest.PassedAllTests(this.LocalDrivingLicenseApplicationID);
-        //}
+        public bool PassedAllTests()
+        {
+            return clsTest.PassedAllTests(this.LocalDrivingLicenseApplicationID);
+        }
 
-        //public static bool PassedAllTests(int LocalDrivingLicenseApplicationID)
-        //{
-        //    //if total passed test less than 3 it will return false otherwise will return true
-        //    return clsTest.PassedAllTests(LocalDrivingLicenseApplicationID);
-        //}
+        public static bool PassedAllTests(int LocalDrivingLicenseApplicationID)
+        {
+            //if total passed test less than 3 it will return false otherwise will return true
+            return clsTest.PassedAllTests(LocalDrivingLicenseApplicationID);
+        }
 
         //public int IssueLicenseForTheFirtTime(string Notes, int CreatedByUserID)
         //{
@@ -332,7 +332,7 @@ namespace DVLDBusinessLayer
         //}
 
         //public int GetActiveLicenseID()
-        //{//this will get the license id that belongs to this application
+        //{
         //    return clsLicense.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID);
         //}
 

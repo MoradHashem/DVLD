@@ -12,13 +12,20 @@ namespace DVLDPresentationLayer.Applocations.Local_Driving_License
 {
     public partial class frmLocalDrivingLicenseApplicationInfo : Form
     {
-        private int _ApplicationInfo;
+        private int _ApplicationID;
 
-        public frmLocalDrivingLicenseApplicationInfo(int LocalDrivingLicenseApplicationID)
+        public frmLocalDrivingLicenseApplicationInfo()
         {
             InitializeComponent();
 
-            usctrlLocalDrivingLicenseApplicationInfo1.LoadLocalDrivingLicenseApplicationInfo(LocalDrivingLicenseApplicationID);
+            
+        }
+
+        public frmLocalDrivingLicenseApplicationInfo(int ApplicationID)
+        {
+            InitializeComponent();
+
+            _ApplicationID = ApplicationID;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -26,5 +33,9 @@ namespace DVLDPresentationLayer.Applocations.Local_Driving_License
             this.Close();
         }
 
+        private void frmLocalDrivingLicenseApplicationInfo_Load(object sender, EventArgs e)
+        {
+            usctrlLocalDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_ApplicationID);
+        }
     }
 }

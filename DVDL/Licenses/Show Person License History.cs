@@ -12,9 +12,13 @@ namespace DVLDPresentationLayer.Licenses
 {
     public partial class frmShowPersonLicenseHistory : Form
     {
-        public frmShowPersonLicenseHistory()
+        private int _ApplicationPersonID = -1;
+
+        public frmShowPersonLicenseHistory(int ApplicationPersonID)
         {
             InitializeComponent();
+
+            _ApplicationPersonID = ApplicationPersonID;
         }
 
     }

@@ -12,9 +12,13 @@ namespace DVLDPresentationLayer.Licenses.Local_Licenses
 {
     public partial class frmShowLicenseInfo : Form
     {
-        public frmShowLicenseInfo()
+        private int _LocalDrivingLicenseApplicationID = -1;
+
+        public frmShowLicenseInfo(int LocalDrivingLicenseApplicationID)
         {
             InitializeComponent();
+
+            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
         }
 
         

@@ -67,6 +67,8 @@ namespace DVLDPresentationLayer
 
         private void _LoadData()
         { 
+            usctrlPersonDetailsWithFilter1.FilterEnabled = false;
+
 
             _User = clsUsers.FindByUserID(_UserID);
 

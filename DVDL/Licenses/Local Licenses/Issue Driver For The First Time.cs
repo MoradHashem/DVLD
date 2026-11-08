@@ -12,9 +12,13 @@ namespace DVLDPresentationLayer.Licenses.Local_Licenses
 {
     public partial class frmIssueDriverForTheFirstTime : Form
     {
-        public frmIssueDriverForTheFirstTime()
+        private int _LocalDrivingLicenseApplication = -1;
+
+        public frmIssueDriverForTheFirstTime(int LocalDrivingLicenseApplication)
         {
             InitializeComponent();
+
+            _LocalDrivingLicenseApplication = LocalDrivingLicenseApplication;
         }
     }
 }

@@ -95,5 +95,12 @@ namespace DVLDPresentationLayer
             frm.ShowDialog();
             
         }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalDrivingLicenseApplicationInfo frm = new frmLocalDrivingLicenseApplicationInfo();
+
+            frm.ShowDialog();
+        }
     }
 }

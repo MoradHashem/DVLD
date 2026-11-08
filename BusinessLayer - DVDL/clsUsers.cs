@@ -144,13 +144,13 @@ namespace DVLDBusinessLayer
 
 
 
-        public static clsUsers FindByPasswordAndUserName(string Password, string UserName)
+        public static clsUsers FindByPasswordAndUserName(string UserName, string Password)
         {
             bool IsActive = true;
             int PersonID = -1, UserID = -1;
 
 
-            if (clsUserDataAccess.GetUserInfoByPasswordAndUserName(ref UserID, ref PersonID, UserName, Password, ref IsActive))
+            if (clsUserDataAccess.GetUserInfoByUsernameAndPassword(UserName, Password, ref UserID, ref PersonID, ref IsActive))
 
 
                 return new clsUsers(UserID, PersonID, UserName, Password, IsActive);

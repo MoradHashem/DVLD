@@ -47,7 +47,7 @@
             // 
             this.lblResult.AutoSize = true;
             this.lblResult.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(47, 683);
+            this.lblResult.Location = new System.Drawing.Point(47, 630);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(87, 18);
             this.lblResult.TabIndex = 65;
@@ -57,7 +57,7 @@
             // 
             this.rbPass.AutoSize = true;
             this.rbPass.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPass.Location = new System.Drawing.Point(208, 679);
+            this.rbPass.Location = new System.Drawing.Point(208, 626);
             this.rbPass.Name = "rbPass";
             this.rbPass.Size = new System.Drawing.Size(64, 22);
             this.rbPass.TabIndex = 74;
@@ -69,7 +69,7 @@
             // 
             this.rbFail.AutoSize = true;
             this.rbFail.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFail.Location = new System.Drawing.Point(286, 679);
+            this.rbFail.Location = new System.Drawing.Point(286, 626);
             this.rbFail.Name = "rbFail";
             this.rbFail.Size = new System.Drawing.Size(57, 22);
             this.rbFail.TabIndex = 75;
@@ -81,7 +81,7 @@
             // 
             this.lblNotes.AutoSize = true;
             this.lblNotes.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotes.Location = new System.Drawing.Point(73, 731);
+            this.lblNotes.Location = new System.Drawing.Point(73, 678);
             this.lblNotes.Name = "lblNotes";
             this.lblNotes.Size = new System.Drawing.Size(61, 18);
             this.lblNotes.TabIndex = 76;
@@ -89,7 +89,7 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(208, 726);
+            this.txtNotes.Location = new System.Drawing.Point(208, 673);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(455, 96);
@@ -101,7 +101,7 @@
             this.lblCannotChange.BackColor = System.Drawing.Color.White;
             this.lblCannotChange.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCannotChange.ForeColor = System.Drawing.Color.Red;
-            this.lblCannotChange.Location = new System.Drawing.Point(349, 676);
+            this.lblCannotChange.Location = new System.Drawing.Point(349, 623);
             this.lblCannotChange.Name = "lblCannotChange";
             this.lblCannotChange.Size = new System.Drawing.Size(286, 24);
             this.lblCannotChange.TabIndex = 81;
@@ -114,12 +114,13 @@
             this.brnClose.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.brnClose.Image = global::DVLDPresentationLayer.Properties.Resources.Close_32;
             this.brnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.brnClose.Location = new System.Drawing.Point(333, 833);
+            this.brnClose.Location = new System.Drawing.Point(333, 780);
             this.brnClose.Name = "brnClose";
             this.brnClose.Size = new System.Drawing.Size(162, 42);
             this.brnClose.TabIndex = 80;
             this.brnClose.Text = "Close";
             this.brnClose.UseVisualStyleBackColor = true;
+            this.brnClose.Click += new System.EventHandler(this.brnClose_Click);
             // 
             // btnSave
             // 
@@ -127,17 +128,18 @@
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::DVLDPresentationLayer.Properties.Resources.Save_32;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(501, 833);
+            this.btnSave.Location = new System.Drawing.Point(501, 780);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(162, 42);
             this.btnSave.TabIndex = 79;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::DVLDPresentationLayer.Properties.Resources.Notes_32;
-            this.pictureBox6.Location = new System.Drawing.Point(151, 726);
+            this.pictureBox6.Location = new System.Drawing.Point(151, 673);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(22, 23);
@@ -148,7 +150,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::DVLDPresentationLayer.Properties.Resources.Number_32;
-            this.pictureBox5.Location = new System.Drawing.Point(151, 683);
+            this.pictureBox5.Location = new System.Drawing.Point(151, 630);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(22, 23);
@@ -161,7 +163,7 @@
             this.usctrlTakeTest1.BackColor = System.Drawing.Color.White;
             this.usctrlTakeTest1.Location = new System.Drawing.Point(10, 3);
             this.usctrlTakeTest1.Name = "usctrlTakeTest1";
-            this.usctrlTakeTest1.Size = new System.Drawing.Size(659, 669);
+            this.usctrlTakeTest1.Size = new System.Drawing.Size(659, 618);
             this.usctrlTakeTest1.TabIndex = 82;
             // 
             // frmTakeTest
@@ -169,7 +171,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(675, 884);
+            this.ClientSize = new System.Drawing.Size(675, 827);
             this.Controls.Add(this.usctrlTakeTest1);
             this.Controls.Add(this.lblCannotChange);
             this.Controls.Add(this.brnClose);
@@ -186,6 +188,7 @@
             this.Name = "frmTakeTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Take Test.cs";
+            this.Load += new System.EventHandler(this.frmTakeTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);

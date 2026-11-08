@@ -28,22 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.usctrlLocalDrivingLicenseApplicationInfo1 = new DVLDPresentationLayer.User_Controls.usctrlLocalDrivingLicenseApplicationInfo();
             this.brnClose = new System.Windows.Forms.Button();
             this.btnIssue = new System.Windows.Forms.Button();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.lblNotes = new System.Windows.Forms.Label();
+            this.usctrlLocalDrivingLicenseApplicationInfo1 = new DVLDPresentationLayer.User_Controls.usctrlLocalDrivingLicenseApplicationInfo();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
-            // 
-            // usctrlLocalDrivingLicenseApplicationInfo1
-            // 
-            this.usctrlLocalDrivingLicenseApplicationInfo1.BackColor = System.Drawing.Color.White;
-            this.usctrlLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(12, 28);
-            this.usctrlLocalDrivingLicenseApplicationInfo1.Name = "usctrlLocalDrivingLicenseApplicationInfo1";
-            this.usctrlLocalDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(904, 410);
-            this.usctrlLocalDrivingLicenseApplicationInfo1.TabIndex = 0;
             // 
             // brnClose
             // 
@@ -51,7 +43,7 @@
             this.brnClose.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.brnClose.Image = global::DVLDPresentationLayer.Properties.Resources.Close_32;
             this.brnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.brnClose.Location = new System.Drawing.Point(586, 613);
+            this.brnClose.Location = new System.Drawing.Point(586, 602);
             this.brnClose.Name = "brnClose";
             this.brnClose.Size = new System.Drawing.Size(162, 42);
             this.brnClose.TabIndex = 85;
@@ -64,7 +56,7 @@
             this.btnIssue.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIssue.Image = global::DVLDPresentationLayer.Properties.Resources.Lost_Driving_License_32;
             this.btnIssue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIssue.Location = new System.Drawing.Point(754, 613);
+            this.btnIssue.Location = new System.Drawing.Point(754, 602);
             this.btnIssue.Name = "btnIssue";
             this.btnIssue.Size = new System.Drawing.Size(162, 42);
             this.btnIssue.TabIndex = 84;
@@ -73,7 +65,7 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(147, 444);
+            this.txtNotes.Location = new System.Drawing.Point(147, 433);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(769, 153);
@@ -82,7 +74,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::DVLDPresentationLayer.Properties.Resources.Notes_32;
-            this.pictureBox6.Location = new System.Drawing.Point(90, 444);
+            this.pictureBox6.Location = new System.Drawing.Point(90, 433);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(22, 23);
@@ -94,24 +86,32 @@
             // 
             this.lblNotes.AutoSize = true;
             this.lblNotes.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotes.Location = new System.Drawing.Point(12, 449);
+            this.lblNotes.Location = new System.Drawing.Point(12, 438);
             this.lblNotes.Name = "lblNotes";
             this.lblNotes.Size = new System.Drawing.Size(61, 18);
             this.lblNotes.TabIndex = 81;
             this.lblNotes.Text = "Notes :";
+            // 
+            // usctrlLocalDrivingLicenseApplicationInfo1
+            // 
+            this.usctrlLocalDrivingLicenseApplicationInfo1.BackColor = System.Drawing.Color.White;
+            this.usctrlLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(15, 12);
+            this.usctrlLocalDrivingLicenseApplicationInfo1.Name = "usctrlLocalDrivingLicenseApplicationInfo1";
+            this.usctrlLocalDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(904, 405);
+            this.usctrlLocalDrivingLicenseApplicationInfo1.TabIndex = 86;
             // 
             // frmIssueDriverForTheFirstTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(931, 676);
+            this.ClientSize = new System.Drawing.Size(931, 661);
+            this.Controls.Add(this.usctrlLocalDrivingLicenseApplicationInfo1);
             this.Controls.Add(this.brnClose);
             this.Controls.Add(this.btnIssue);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.lblNotes);
-            this.Controls.Add(this.usctrlLocalDrivingLicenseApplicationInfo1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmIssueDriverForTheFirstTime";
@@ -124,12 +124,11 @@
         }
 
         #endregion
-
-        private User_Controls.usctrlLocalDrivingLicenseApplicationInfo usctrlLocalDrivingLicenseApplicationInfo1;
         private System.Windows.Forms.Button brnClose;
         private System.Windows.Forms.Button btnIssue;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label lblNotes;
+        private User_Controls.usctrlLocalDrivingLicenseApplicationInfo usctrlLocalDrivingLicenseApplicationInfo1;
     }
 }

@@ -120,7 +120,7 @@ namespace DVLDPresentationLayer
             lnkRemove.Visible = (pbPersonImage.Image != null);
 
             dtpDateOfBirth.MaxDate = DateTime.Now.AddYears(-18);
-            dtpDateOfBirth.Value = dtpDateOfBirth.MinDate;
+            dtpDateOfBirth.Value = dtpDateOfBirth.MaxDate;
 
             dtpDateOfBirth.MinDate = DateTime.Now.AddYears(-100);
 

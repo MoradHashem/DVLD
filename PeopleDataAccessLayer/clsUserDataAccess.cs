@@ -237,64 +237,60 @@ namespace DVLDDataAccessLayer
             return IsFound;
         }
 
-        public static bool GetUserInfoByPasswordAndUserName(ref int UserID, ref int PersonID, string UserName, string Password, ref bool IsActive)
+        public static bool GetUserInfoByUsernameAndPassword(string UserName, string Password, ref int UserID, ref int PersonID, ref bool IsActive)
         {
-            bool IsFound = false;
+            bool isFound = false;
 
-            SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string Query = "SELECT * FROM Users WHERE Password = @Password and UserName = @UserName";
+            string query = "SELECT * FROM Users WHERE Username = @Username and Password=@Password;";
 
-            SqlCommand Command = new SqlCommand(Query, Connection);
+            SqlCommand command = new SqlCommand(query, connection);
 
-            Command.Parameters.AddWithValue("@UserName", UserName);
-            Command.Parameters.AddWithValue("@Password", Password);
-
+            command.Parameters.AddWithValue("@Username", UserName);
+            command.Parameters.AddWithValue("@Password", Password);
 
 
             try
             {
-                Connection.Open();
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
 
-                SqlDataReader Reader = Command.ExecuteReader();
-
-                if (Reader.Read())
+                if (reader.Read())
                 {
-                    IsFound = true;
+                    isFound = true;
 
-                    UserID = (int)Reader["UserID"];
-                    PersonID = (int)Reader["PersonID"];
-                    UserName = (string)Reader["UserName"];
-                    Password = (string)Reader["Password"];
-                    IsActive = (bool)Reader["IsActive"];
+                    UserID = (int)reader["UserID"];
+                    PersonID = (int)reader["PersonID"];
+                    UserName = (string)reader["UserName"];
+                    Password = (string)reader["Password"];
+                    IsActive = (bool)reader["IsActive"];
+
 
                 }
                 else
                 {
-                    IsFound = false;
+                    isFound = false;
                 }
 
+                reader.Close();
 
 
-                Reader.Close();
             }
-            catch
+            catch (Exception ex)
             {
-                IsFound = false;
+
+                isFound = false;
             }
             finally
             {
-                Connection.Close();
+                connection.Close();
             }
 
-
-
-
-
-            return IsFound;
+            return isFound;
         }
 
-            
+
         public static DataTable ListUsers()
         {
             DataTable dtUsers = new DataTable();
