@@ -7,20 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLDBusinessLayer;
 
 namespace DVLDPresentationLayer.Licenses.Local_Licenses
 {
     public partial class frmShowLicenseInfo : Form
     {
-        private int _LocalDrivingLicenseApplicationID = -1;
+        private int _LicenseID;
 
-        public frmShowLicenseInfo(int LocalDrivingLicenseApplicationID)
+        public frmShowLicenseInfo(int LicenseID)
         {
             InitializeComponent();
 
-            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
+            _LicenseID = LicenseID;
         }
 
-        
+        private void brnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmShowLicenseInfo_Load(object sender, EventArgs e)
+        {
+            usctrlDriverLicenseInfo1.LoadInfo(_LicenseID);
+        }
     }
 }

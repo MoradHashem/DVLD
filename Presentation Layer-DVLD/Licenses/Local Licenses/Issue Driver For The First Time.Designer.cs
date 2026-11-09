@@ -49,6 +49,7 @@
             this.brnClose.TabIndex = 85;
             this.brnClose.Text = "Close";
             this.brnClose.UseVisualStyleBackColor = true;
+            this.brnClose.Click += new System.EventHandler(this.brnClose_Click);
             // 
             // btnIssue
             // 
@@ -62,6 +63,7 @@
             this.btnIssue.TabIndex = 84;
             this.btnIssue.Text = "Issue";
             this.btnIssue.UseVisualStyleBackColor = true;
+            this.btnIssue.Click += new System.EventHandler(this.btnIssue_Click);
             // 
             // txtNotes
             // 
@@ -117,6 +119,7 @@
             this.Name = "frmIssueDriverForTheFirstTime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Driver For The First Time.cs";
+            this.Load += new System.EventHandler(this.frmIssueDriverForTheFirstTime_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

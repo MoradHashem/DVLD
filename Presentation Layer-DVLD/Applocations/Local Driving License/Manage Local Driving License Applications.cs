@@ -231,19 +231,19 @@ namespace DVLDPresentationLayer.Applocations.Local_Driving_License
         {
             int LocalDrivingLicenseApplicationID = (int)dgvListLocalDrivingLicenseApplications.CurrentRow.Cells["LocalDrivingLicenseApplicationID"].Value;
 
-            //int LicenseID = clsLocalDrivingLicenseApplications.FindByLocalDrivingLicenseApplicationID(LocalDrivingLicenseApplicationID).GetActiveLicenseID();
+            int LicenseID = clsLocalDrivingLicenseApplications.FindByLocalDrivingLicenseApplicationID(LocalDrivingLicenseApplicationID).GetActiveLicenseID();
 
-            //if (LicenseID != -1)
-            //{
-            //    frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
-            //    frm.ShowDialog();
+            if (LicenseID != -1)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frm.ShowDialog();
 
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -364,14 +364,14 @@ namespace DVLDPresentationLayer.Applocations.Local_Driving_License
 
             int TotalPassedTests = (int)dgvListLocalDrivingLicenseApplications.CurrentRow.Cells[5].Value;
 
-            //bool LicenseExists = LocalDrivingLicenseApplication.IsLicenseIssued();
+            bool LicenseExists = LocalDrivingLicenseApplication.IsLicenseIssued();
 
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false; //(TotalPassedTests == 3) && !LicenseExists;
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = (TotalPassedTests == 3) && !LicenseExists;
 
 
-            showLicenseToolStripMenuItem.Enabled = false; //LicenseExists;
-            //editToolStripMenuItem.Enabled = !LicenseExists && (LocalDrivingLicenseApplication.ApplicationStatus == clsApplications.enApplicationStatus.New);
-            //ScheduleTestsMenue.Enabled = !LicenseExists;
+            showLicenseToolStripMenuItem.Enabled = LicenseExists;
+            tsmiEdit.Enabled = !LicenseExists && (LocalDrivingLicenseApplication.ApplicationStatus == clsApplications.enApplicationStatus.New);
+            ScheduleTestsMenue.Enabled = !LicenseExists;
 
 
             tsmiCancelApplication.Enabled = (LocalDrivingLicenseApplication.ApplicationStatus == clsApplications.enApplicationStatus.New);

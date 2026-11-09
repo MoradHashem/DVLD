@@ -150,6 +150,12 @@
     <Compile Include="User Controls\usctrlDriverLicenseInfo.Designer.cs">
       <DependentUpon>usctrlDriverLicenseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="User Controls\usctrlDriverLicenseInfoWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\usctrlDriverLicenseInfoWithFilter.Designer.cs">
+      <DependentUpon>usctrlDriverLicenseInfoWithFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\usctrlDriverLicenses.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     <EmbeddedResource Include="User Controls\usctrlDriverLicenseInfo.resx">
       <DependentUpon>usctrlDriverLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\usctrlDriverLicenseInfoWithFilter.resx">
+      <DependentUpon>usctrlDriverLicenseInfoWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Controls\usctrlDriverLicenses.resx">
       <DependentUpon>usctrlDriverLicenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,7 +369,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer - DVDL\BusinessLayer - DVLD.csproj">
+    <ProjectReference Include="..\Business Layer - DVDL\BusinessLayer - DVLD.csproj">
       <Project>{0fc010c3-f686-42dc-9430-aa80b013649c}</Project>
       <Name>BusinessLayer - DVLD</Name>
     </ProjectReference>

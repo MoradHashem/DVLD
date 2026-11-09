@@ -40,9 +40,9 @@ namespace DVLDPresentationLayer.User_Controls
 
         private void _FillLocalDrivingLicenseApplicationInfo()
         {
-            //_LicenseID = _LocalDrivingLicenseApplications.GetActiveLicenseID();
+            _LicenseID = _LocalDrivingLicenseApplications.GetActiveLicenseID();
 
-            lnkShowLicenseInfo.Enabled = false; //(_LicenseID != -1);
+            lnkShowLicenseInfo.Enabled = (_LicenseID != -1);
 
             lblDLAID.Text = _LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID.ToString();
             lblAppliedForLicenseValue.Text = clsLicenseClass.Find(_LocalDrivingLicenseApplications.LicenseClassID).LicenseName;
@@ -82,9 +82,9 @@ namespace DVLDPresentationLayer.User_Controls
 
         private void lnkShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //Form frm = new frmShowLicenseInfo(_LocalDrivingLicenseApplications.GetActiveLicenseID());
+            Form frm = new frmShowLicenseInfo(_LocalDrivingLicenseApplications.GetActiveLicenseID());
 
-            //frm.ShowDialog();
+            frm.ShowDialog();
         }
     }
 }

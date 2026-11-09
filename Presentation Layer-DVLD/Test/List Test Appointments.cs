@@ -112,13 +112,13 @@ namespace DVLDPresentationLayer.Test
             if (dgvListAppointments.Rows.Count > 0)
             {
                 dgvListAppointments.Columns[0].HeaderText = "Appointment ID";
-                dgvListAppointments.Columns[0].Width = 150;
+                dgvListAppointments.Columns[0].Width = 190;
 
                 dgvListAppointments.Columns[1].HeaderText = "Appointment Date";
-                dgvListAppointments.Columns[1].Width = 200;
+                dgvListAppointments.Columns[1].Width = 250;
 
                 dgvListAppointments.Columns[2].HeaderText = "Paid Fees";
-                dgvListAppointments.Columns[2].Width = 150;
+                dgvListAppointments.Columns[2].Width = 180;
 
                 dgvListAppointments.Columns[3].HeaderText = "Is Locked";
                 dgvListAppointments.Columns[3].Width = 100;

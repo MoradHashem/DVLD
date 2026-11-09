@@ -44,6 +44,8 @@
     <Compile Include="clsApplications.cs" />
     <Compile Include="clsApplicationTypes.cs" />
     <Compile Include="clsCountry.cs" />
+    <Compile Include="clsDriver.cs" />
+    <Compile Include="clsLicense.cs" />
     <Compile Include="clsLicenseClass.cs" />
     <Compile Include="clsLocalDrivingLicenseApplications.cs" />
     <Compile Include="clsPeople.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PeopleDataAccessLayer\DataAccessLayer-DVLD.csproj">
+    <ProjectReference Include="..\Data Access Layer - DVLD\DataAccessLayer-DVLD.csproj">
       <Project>{dc23e990-6729-4fd3-96a9-a8a05c63b78a}</Project>
       <Name>DataAccessLayer-DVLD</Name>
     </ProjectReference>

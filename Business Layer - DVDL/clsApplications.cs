@@ -187,7 +187,7 @@ namespace DVLDBusinessLayer
         }
 
 
-        public bool SetComppleted()
+        public bool SetCompleted()
         {
             return clsApplicationsDataAccess.UpdateStatus(this.ApplicationID, (int)enApplicationStatus.Completed);
         }
