@@ -12,14 +12,27 @@ namespace DVLDPresentationLayer.Licenses
 {
     public partial class frmShowPersonLicenseHistory : Form
     {
-        private int _ApplicationPersonID = -1;
+        private int _PersonID = -1;
 
-        public frmShowPersonLicenseHistory(int ApplicationPersonID)
+        public frmShowPersonLicenseHistory(int PersonID)
         {
             InitializeComponent();
 
-            _ApplicationPersonID = ApplicationPersonID;
+            _PersonID = PersonID;
         }
 
+        private void frmShowPersonLicenseHistory_Load(object sender, EventArgs e)
+        {
+            if (_PersonID != -1)
+            {
+                usctrlPersonDetails1.LoadPersonInfo(_PersonID);
+                usctrlDriverLicenses1.LoadInfoByPersonID(_PersonID);
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

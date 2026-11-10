@@ -34,12 +34,12 @@ namespace DVLDBusinessLayer
                 return GetIssueReasonText(this.IssueReason);
             }
         }
-        //public clsDetainedLicense DetainedInfo { set; get; }
+        public clsDetainedLicense DetainedInfo { set; get; }
         public int CreatedByUserID { set; get; }
-        //public bool IsDetained
-        //{
-        //    get { return clsDetainedLicense.IsLicenseDetained(this.LicenseID); }
-        //}
+        public bool IsDetained
+        {
+            get { return clsDetainedLicense.IsLicenseDetained(this.LicenseID); }
+        }
 
         public clsLicense()
         {
@@ -153,7 +153,6 @@ namespace DVLDBusinessLayer
             return false;
         }
 
-
         public static bool IsLicenseExistByPersonID(int PersonID, int LicenseClassID)
         {
             return (GetActiveLicenseIDByPersonID(PersonID, LicenseClassID) != -1);
@@ -209,51 +208,49 @@ namespace DVLDBusinessLayer
             }
         }
 
+        public int Detain(float FineFees, int CreatedByUserID)
+        {
+            clsDetainedLicense detainedLicense = new clsDetainedLicense();
+            detainedLicense.LicenseID = this.LicenseID;
+            detainedLicense.DetainDate = DateTime.Now;
+            detainedLicense.FineFees = Convert.ToSingle(FineFees);
+            detainedLicense.CreatedByUserID = CreatedByUserID;
+
+            if (!detainedLicense.Save())
+            {
+
+                return -1;
+            }
+
+            return detainedLicense.DetainID;
+
+        }
+
+        public bool ReleaseDetainedLicense(int ReleasedByUserID, ref int ApplicationID)
+        {
+
+            clsApplications Application = new clsApplications();
+
+            Application.ApplicantPersonID = this.DriverInfo.PersonID;
+            Application.ApplicationDate = DateTime.Now;
+            Application.ApplicationTypeID = (int)clsApplications.enApplicationType.ReleaseDetainedDrivingLicsense;
+            Application.ApplicationStatus = clsApplications.enApplicationStatus.Completed;
+            Application.LastStatusDate = DateTime.Now;
+            Application.PaidFees = clsApplicationTypes.Find((int)clsApplications.enApplicationType.ReleaseDetainedDrivingLicsense).ApplicationFees;
+            Application.CreatedByUserID = ReleasedByUserID;
+
+            if (!Application.Save())
+            {
+                ApplicationID = -1;
+                return false;
+            }
+
+            ApplicationID = Application.ApplicationID;
 
 
-        //public int Detain(float FineFees, int CreatedByUserID)
-        //{
-        //    clsDetainedLicense detainedLicense = new clsDetainedLicense();
-        //    detainedLicense.LicenseID = this.LicenseID;
-        //    detainedLicense.DetainDate = DateTime.Now;
-        //    detainedLicense.FineFees = Convert.ToSingle(FineFees);
-        //    detainedLicense.CreatedByUserID = CreatedByUserID;
+            return this.DetainedInfo.ReleaseDetainedLicense(ReleasedByUserID, Application.ApplicationID);
 
-        //    if (!detainedLicense.Save())
-        //    {
-
-        //        return -1;
-        //    }
-
-        //    return detainedLicense.DetainID;
-
-        //}
-
-        //public bool ReleaseDetainedLicense(int ReleasedByUserID, ref int ApplicationID)
-        //{
-
-        //    clsApplications Application = new clsApplications();
-
-        //    Application.ApplicantPersonID = this.DriverInfo.PersonID;
-        //    Application.ApplicationDate = DateTime.Now;
-        //    Application.ApplicationTypeID = (int)clsApplications.enApplicationType.ReleaseDetainedDrivingLicsense;
-        //    Application.ApplicationStatus = clsApplications.enApplicationStatus.Completed;
-        //    Application.LastStatusDate = DateTime.Now;
-        //    Application.PaidFees = clsApplicationTypes.Find((int)clsApplications.enApplicationType.ReleaseDetainedDrivingLicsense).ApplicationFees;
-        //    Application.CreatedByUserID = ReleasedByUserID;
-
-        //    if (!Application.Save())
-        //    {
-        //        ApplicationID = -1;
-        //        return false;
-        //    }
-
-        //    ApplicationID = Application.ApplicationID;
-
-
-        //    return this.DetainedInfo.ReleaseDetainedLicense(ReleasedByUserID, Application.ApplicationID);
-
-        //}
+        }
 
         public clsLicense RenewLicense(string Notes, int CreatedByUserID)
         {

@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using DVLDBusinessLayer;
 using DVLDPresentationLayer.Test.Test_Types;
 using DVLDPresentationLayer.Applocations.Local_Driving_License;
+using DVLDPresentationLayer.Applocations.Renew_Local_License;
+using DVLDPresentationLayer.Applocations.Replace_Lost_Or_Damaged_License;
+using DVLDPresentationLayer.Driver;
+using DVLDPresentationLayer.Licenses.Detain_License;
 
 namespace DVLDPresentationLayer
 {
@@ -99,6 +103,40 @@ namespace DVLDPresentationLayer
         private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLocalDrivingLicenseApplicationInfo frm = new frmLocalDrivingLicenseApplicationInfo();
+
+            frm.ShowDialog();
+        }
+
+        private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLocalDrivingLicenseApplication frm = new frmRenewLocalDrivingLicenseApplication();
+
+
+            frm.ShowDialog();
+        }
+
+        private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLostOrDamagedLicenseApplication frm = new frmReplaceLostOrDamagedLicenseApplication();
+
+            frm.ShowDialog();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDrivers frm = new frmListDrivers();
+
+            frm.ShowDialog();
+        }
+
+        private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicenseApplication frm = new frmDetainLicenseApplication();
 
             frm.ShowDialog();
         }

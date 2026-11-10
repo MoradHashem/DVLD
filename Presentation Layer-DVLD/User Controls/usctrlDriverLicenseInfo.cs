@@ -64,7 +64,7 @@ namespace DVLDPresentationLayer.User_Controls
 
             lblLicenseIDValue.Text = _License.LicenseID.ToString();
             lbIIsActiveValue.Text = _License.IsActive ? "Yes" : "No";
-            lblIsDetaintedValue.Text = "No"; //_License.IsDetained ? "Yes" : "No";
+            lblIsDetaintedValue.Text = _License.IsDetained ? "Yes" : "No";
             lblClassValue.Text = _License.LicenseClassIfo.LicenseName;
             lblNameValue.Text = _License.DriverInfo.PersonInfo.FullName;
             lblNationalNoValue.Text = _License.DriverInfo.PersonInfo.NationalNo;

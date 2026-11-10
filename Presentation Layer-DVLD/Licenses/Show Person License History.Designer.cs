@@ -88,6 +88,7 @@
             this.btnClose.TabIndex = 42;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmShowPersonLicenseHistory
             // 
@@ -105,6 +106,7 @@
             this.Name = "frmShowPersonLicenseHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Show Person License History";
+            this.Load += new System.EventHandler(this.frmShowPersonLicenseHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ptrEmail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
