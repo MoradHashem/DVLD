@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DVLDBusinessLayer;
 using DVLDPresentationLayer.Licenses.Local_Licenses;
+using DVLDPresentationLayer.Licenses.International_Licenses;
 
 namespace DVLDPresentationLayer.User_Controls
 {
@@ -59,7 +60,7 @@ namespace DVLDPresentationLayer.User_Controls
         private void _LoadInternationalLicenseInfo()
         {
 
-            _dtDriverInternationalLicensesHistory = null; //clsDriver.GetInternationalLicenses(_DriverID);
+            _dtDriverInternationalLicensesHistory = clsDriver.GetInternationalLicenses(_DriverID);
 
 
             dgvInternationalLicensesHistory.DataSource = _dtDriverInternationalLicensesHistory;
@@ -68,10 +69,10 @@ namespace DVLDPresentationLayer.User_Controls
             if (dgvInternationalLicensesHistory.Rows.Count > 0)
             {
                 dgvInternationalLicensesHistory.Columns[0].HeaderText = "Int.License ID";
-                dgvInternationalLicensesHistory.Columns[0].Width = 160;
+                dgvInternationalLicensesHistory.Columns[0].Width = 150;
 
                 dgvInternationalLicensesHistory.Columns[1].HeaderText = "Application ID";
-                dgvInternationalLicensesHistory.Columns[1].Width = 130;
+                dgvInternationalLicensesHistory.Columns[1].Width = 115;
 
                 dgvInternationalLicensesHistory.Columns[2].HeaderText = "L.License ID";
                 dgvInternationalLicensesHistory.Columns[2].Width = 130;
@@ -138,9 +139,9 @@ namespace DVLDPresentationLayer.User_Controls
 
         private void InternationalLicenseHistorytoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //int InternationalLicenseID = (int)dgvInternationalLicensesHistory.CurrentRow.Cells[0].Value;
-            //frmShowInternationalLicenseInfo frm = new frmShowInternationalLicenseInfo(InternationalLicenseID);
-            //frm.ShowDialog();
+            int InternationalLicenseID = (int)dgvInternationalLicensesHistory.CurrentRow.Cells[0].Value;
+            frmShowInternationalLicenseInfo frm = new frmShowInternationalLicenseInfo(InternationalLicenseID);
+            frm.ShowDialog();
 
         }
     }

@@ -15,6 +15,7 @@ using DVLDPresentationLayer.Applocations.Replace_Lost_Or_Damaged_License;
 using DVLDPresentationLayer.Driver;
 using DVLDPresentationLayer.Licenses.Detain_License;
 using DVLDPresentationLayer.Applocations.Release_Detained_License;
+using DVLDPresentationLayer.Applocations.International_License;
 
 namespace DVLDPresentationLayer
 {
@@ -147,6 +148,20 @@ namespace DVLDPresentationLayer
         private void manageDetainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListDetainedLicenses frm = new frmListDetainedLicenses();
+
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewInternationalLicenseApplication frm = new frmNewInternationalLicenseApplication();
+
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListInternationalLicesnseApplications frm = new frmListInternationalLicesnseApplications();
 
             frm.ShowDialog();
         }
