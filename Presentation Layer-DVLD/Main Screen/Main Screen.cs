@@ -14,6 +14,7 @@ using DVLDPresentationLayer.Applocations.Renew_Local_License;
 using DVLDPresentationLayer.Applocations.Replace_Lost_Or_Damaged_License;
 using DVLDPresentationLayer.Driver;
 using DVLDPresentationLayer.Licenses.Detain_License;
+using DVLDPresentationLayer.Applocations.Release_Detained_License;
 
 namespace DVLDPresentationLayer
 {
@@ -131,12 +132,21 @@ namespace DVLDPresentationLayer
 
         private void releaseDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmReleaseDetainedLicenseApplication frm = new frmReleaseDetainedLicenseApplication();
 
+            frm.ShowDialog();
         }
 
         private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDetainLicenseApplication frm = new frmDetainLicenseApplication();
+
+            frm.ShowDialog();
+        }
+
+        private void manageDetainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frm = new frmListDetainedLicenses();
 
             frm.ShowDialog();
         }

@@ -77,7 +77,7 @@ namespace DVLDBusinessLayer
 
             this.DriverInfo = clsDriver.FindByDriverID(this.DriverID);
             this.LicenseClassIfo = clsLicenseClass.Find(this.LicenseClass);
-            //this.DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
+            this.DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
 
             Mode = enMode.Update;
         }
@@ -301,7 +301,6 @@ namespace DVLDBusinessLayer
         {
 
 
-            //First Create Applicaiton 
             clsApplications Application = new clsApplications();
 
             Application.ApplicantPersonID = this.DriverInfo.PersonID;

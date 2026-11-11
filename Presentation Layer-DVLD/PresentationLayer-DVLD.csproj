@@ -74,6 +74,18 @@
     <Compile Include="Applocations\Local Driving License\Manage Local Driving License Applications.Designer.cs">
       <DependentUpon>Manage Local Driving License Applications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applocations\Release Detained License\frmListDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applocations\Release Detained License\frmListDetainedLicenses.Designer.cs">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applocations\Release Detained License\frmReleaseDetainedLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applocations\Release Detained License\frmReleaseDetainedLicenseApplication.Designer.cs">
+      <DependentUpon>frmReleaseDetainedLicenseApplication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applocations\Renew Local License\frmRenewLocalDrivingLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applocations\Local Driving License\Manage Local Driving License Applications.resx">
       <DependentUpon>Manage Local Driving License Applications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applocations\Release Detained License\frmListDetainedLicenses.resx">
+      <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applocations\Release Detained License\frmReleaseDetainedLicenseApplication.resx">
+      <DependentUpon>frmReleaseDetainedLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applocations\Renew Local License\frmRenewLocalDrivingLicenseApplication.resx">
       <DependentUpon>frmRenewLocalDrivingLicenseApplication.cs</DependentUpon>
@@ -667,6 +685,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Release Detained License 64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Detain 512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
